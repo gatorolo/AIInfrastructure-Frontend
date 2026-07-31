@@ -9,11 +9,11 @@
       </div>
     </div>
     <nav class="nav-links">
-      <a href="#" class="active">Home</a>
-      <a href="#">Calculator</a>
-      <a href="#">Benchmark</a>
-      <a href="#">Industry Report</a>
-      <a href="#">About Us</a>
+      <a href="#" class="active" (click)="$event.preventDefault()">Home</a>
+      <a href="#" (click)="openModal('calculator', $event)">Calculator</a>
+      <a href="#" (click)="openModal('benchmark', $event)">Benchmark</a>
+      <a href="#" (click)="openModal('industry_report', $event)">Industry Report</a>
+      <a href="#" (click)="openModal('team', $event)">For Teams</a>
     </nav>
     <div class="header-actions">
       <a href="#" class="login">Login</a>
@@ -69,8 +69,8 @@
       <div class="hero-cta animate-fade-up delay-3">
         <div class="input-group">
           <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" class="input-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <input type="email" placeholder="Enter your work email">
-          <button class="btn-primary">Start Now - It's Free</button>
+          <input type="email" placeholder="Enter your work email" [(ngModel)]="userEmail">
+          <button class="btn-primary" (click)="comenzarBenchmark()">Start Now - It's Free</button>
         </div>
         <div class="cta-trust">
           <span>✓ No credit card required</span>
@@ -85,19 +85,20 @@
         <div class="dash-sidebar">
           <div class="dash-logo"></div>
           <div class="dash-nav">
-            <div class="dash-item active"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Overview</div>
-            <div class="dash-item"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg> Calculator</div>
-            <div class="dash-item"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Benchmark</div>
-            <div class="dash-item"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg> Your Report</div>
-            <div class="dash-item"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg> Industry Report</div>
+            <div class="dash-item" [class.active]="activeDashboardTab === 'overview'" (click)="setDashboardTab('overview')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Overview</div>
+            <div class="dash-item" [class.active]="activeDashboardTab === 'calculator'" (click)="setDashboardTab('calculator')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg> Calculator</div>
+            <div class="dash-item" [class.active]="activeDashboardTab === 'benchmark'" (click)="setDashboardTab('benchmark')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Benchmark</div>
+            <div class="dash-item" [class.active]="activeDashboardTab === 'custom_report'" (click)="setDashboardTab('custom_report')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg> Your Report</div>
+            <div class="dash-item" [class.active]="activeDashboardTab === 'industry_report'" (click)="setDashboardTab('industry_report')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg> Industry Report</div>
             <div class="dash-item"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Resources</div>
           </div>
         </div>
         
         <!-- Main Content -->
         <div class="dash-main">
-          <div class="dash-header">
-            <h2>Your Benchmark Overview</h2>
+          <div *ngIf="activeDashboardTab === 'overview'">
+            <div class="dash-header">
+              <h2>Your Benchmark Overview</h2>
             <button class="btn-outline btn-small"><svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download PDF</button>
           </div>
           
@@ -105,14 +106,14 @@
             <div class="metric-card wide">
               <div class="pos-info">
                 <span class="label">Industry Position</span>
-                <span class="value text-gold">Top 18%</span>
+                <span class="value text-gold">Top {{ dashboardData?.posicionIndustria || '18' }}%</span>
                 <span class="desc">You're performing better than<br>82% of data centers globally</span>
               </div>
               <div class="score-chart">
                 <div class="gauge">
                   <div class="gauge-fill"></div>
                   <div class="gauge-center">
-                    <span class="score-num">82</span>
+                    <span class="score-num">{{ dashboardData?.scoreEficiencia || '82' }}</span>
                     <span class="score-max">/100</span>
                   </div>
                 </div>
@@ -122,7 +123,7 @@
             
             <div class="metric-card">
               <span class="label">Maturity Level</span>
-              <span class="value text-gold">Advanced</span>
+              <span class="value text-gold">{{ dashboardData?.nivelMadurez || 'Advanced' }}</span>
               <span class="desc">Strong operational foundation<br>with optimization opportunities</span>
               <div class="crown-icon">
                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="var(--color-gold)" stroke-width="2" fill="none"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
@@ -135,25 +136,25 @@
             <div class="kpi-grid">
               <div class="kpi-box">
                 <span class="label">Annual Waste</span>
-                <span class="value">$2.45M</span>
+                <span class="value">${{ dashboardData?.annualWaste || '2.45' }}M</span>
                 <span class="desc">32% of total spend</span>
                 <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
               </div>
               <div class="kpi-box">
                 <span class="label">Idle Capacity</span>
-                <span class="value">38%</span>
+                <span class="value">{{ dashboardData?.idleCapacityPct || '38' }}%</span>
                 <span class="desc">Available but unutilized</span>
                 <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
               </div>
               <div class="kpi-box">
                 <span class="label">Power Usage</span>
-                <span class="value">1.42 PUE</span>
+                <span class="value">{{ dashboardData?.powerUsagePue || '1.42' }} PUE</span>
                 <span class="desc">Above industry avg.</span>
                 <div class="trend down text-gold"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg></div>
               </div>
               <div class="kpi-box">
                 <span class="label">Efficiency Score</span>
-                <span class="value">72 <span class="max">/100</span></span>
+                <span class="value">{{ dashboardData?.scoreEficiencia || '72' }} <span class="max">/100</span></span>
                 <span class="desc">Good</span>
                 <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
               </div>
@@ -172,7 +173,76 @@
               </div>
             </div>
             <button class="btn-primary btn-small">Download PDF <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button>
+            </div>
           </div>
+
+          <!-- Calculator Tab Content -->
+          <div *ngIf="activeDashboardTab === 'calculator'" class="dash-tab-content">
+            <div class="dash-header">
+              <h2>Cost Calculator</h2>
+            </div>
+            <div class="metric-card">
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Estimate the financial impact of your idle capacity directly here.</p>
+              <div class="input-group" style="margin-bottom: 1rem;">
+                <label style="color: var(--text-muted); display:block; margin-bottom: 0.5rem;">Total Annual Spend ($)</label>
+                <input type="number" [(ngModel)]="calcSpend" placeholder="e.g. 5000000" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%; max-width: 300px;">
+              </div>
+              <div class="input-group" style="margin-bottom: 1.5rem;">
+                <label style="color: var(--text-muted); display:block; margin-bottom: 0.5rem;">Estimated Idle CPU (%)</label>
+                <input type="number" [(ngModel)]="calcIdle" placeholder="e.g. 35" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%; max-width: 300px;">
+              </div>
+              <button class="btn-primary" (click)="calculateImpact()">Calculate Impact</button>
+              
+              <div *ngIf="calcResult !== null" style="margin-top: 2rem; padding: 1.5rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--color-green); border-radius: 8px;">
+                <span style="display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Estimated Financial Waste</span>
+                <span style="display: block; color: var(--color-gold); font-size: 2rem; font-weight: bold;">{{ calcResult | currency:'USD' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benchmark Tab Content -->
+          <div *ngIf="activeDashboardTab === 'benchmark'" class="dash-tab-content">
+            <div class="dash-header">
+              <h2>Infrastructure Benchmark</h2>
+            </div>
+            <div class="metric-card">
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Answer the following questions to assess your maturity.</p>
+              <div style="background: var(--bg-card); border: 1px solid var(--border-green); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                <strong style="display: block; margin-bottom: 1rem;">1. What is your primary cooling mechanism?</strong>
+                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="b1"> Basic CRAC units</label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="b1"> Hot/Cold aisle containment</label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="b1"> Liquid cooling (Direct-to-chip or Immersion)</label>
+              </div>
+              <button class="btn-primary">Next Question</button>
+            </div>
+          </div>
+
+          <!-- Custom Report Tab Content -->
+          <div *ngIf="activeDashboardTab === 'custom_report'" class="dash-tab-content">
+            <div class="dash-header">
+              <h2>Your Custom Report</h2>
+            </div>
+            <div class="metric-card" style="text-align: center; padding: 3rem 1rem;">
+              <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-gold)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Ready for Download</h3>
+              <p style="color: var(--text-muted); margin-bottom: 2rem;">Your personalized 15-page PDF with strategic insights and actionable recommendations.</p>
+              <button class="btn-primary">Download PDF Report</button>
+            </div>
+          </div>
+
+          <!-- Industry Report Tab Content -->
+          <div *ngIf="activeDashboardTab === 'industry_report'" class="dash-tab-content">
+            <div class="dash-header">
+              <h2>Industry Report 2024</h2>
+            </div>
+            <div class="metric-card" style="text-align: center; padding: 3rem 1rem;">
+              <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-green)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">State of AI Infrastructure</h3>
+              <p style="color: var(--text-muted); margin-bottom: 2rem;">Discover global trends, average PUE metrics, and next-gen cooling adoption rates.</p>
+              <button class="btn-primary">View Report Online</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -205,7 +275,7 @@
         <div class="content">
           <h3>Calculator</h3>
           <p>Quantify the true cost of underutilized capacity.</p>
-          <a href="#" class="link">Try Calculator →</a>
+          <a href="#" class="link" (click)="openModal('calculator', $event)">Try Calculator →</a>
         </div>
       </div>
       
@@ -216,7 +286,7 @@
         <div class="content">
           <h3>Benchmark</h3>
           <p>Evaluate your maturity across 6 key operational domains.</p>
-          <a href="#" class="link">Take Benchmark →</a>
+          <a href="#" class="link" (click)="openModal('benchmark', $event)">Take Benchmark →</a>
         </div>
       </div>
       
@@ -227,7 +297,7 @@
         <div class="content">
           <h3>Your Report</h3>
           <p>Get your personalized PDF report with insights and recommendations.</p>
-          <a href="#" class="link">See Example Report →</a>
+          <a href="#" class="link" (click)="openModal('custom_report', $event)">See Example Report →</a>
         </div>
       </div>
       
@@ -238,7 +308,7 @@
         <div class="content">
           <h3>Industry Report</h3>
           <p>Explore trends and insights from the global data center industry.</p>
-          <a href="#" class="link">Read the Report →</a>
+          <a href="#" class="link" (click)="openModal('industry_report', $event)">Read the Report →</a>
         </div>
       </div>
       
@@ -249,7 +319,7 @@
         <div class="content">
           <h3>For Teams</h3>
           <p>Invite your team and manage assessments together.</p>
-          <a href="#" class="link">Learn More →</a>
+          <a href="#" class="link" (click)="openModal('team', $event)">Learn More →</a>
         </div>
       </div>
     </div>
@@ -280,15 +350,125 @@
       </a>
     </div>
   </footer>
-
+  <p class="cat">@Gatorolo</p>
   <div class="gemini-avatar-container">
     <!-- Globo de texto que aparece al hacer hover -->
-    <div class="chat-tooltip">¿Do you need help?</div>
+    <div class="chat-tooltip" *ngIf="!isChatOpen">¿Do you need help?</div>
     
     <!-- Contenedor del avatar con el video y el estado -->
-    <div class="avatar-wrapper">
+    <div class="avatar-wrapper" (click)="toggleChat()" style="cursor: pointer;">
       <video src="assets/sagrada-3.mp4?v=3" autoplay loop [muted]="true" playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true" class="avatar-img"></video>
       <span class="status-indicator"></span>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" *ngIf="isChatOpen">
+      <div class="chat-header">
+        <div class="header-info">
+          <span class="status-dot"></span>
+          <strong>Gemini AI Assistant</strong>
+        </div>
+        <button class="close-btn" (click)="toggleChat()">&times;</button>
+      </div>
+      
+      <div class="chat-body">
+        <div class="message" *ngFor="let msg of chatMessages" [ngClass]="msg.isBot ? 'bot-message' : 'user-message'">
+          <div class="msg-bubble">{{ msg.text }}</div>
+        </div>
+        <div class="message bot-message" *ngIf="isChatLoading">
+          <div class="msg-bubble typing">
+            <span>.</span><span>.</span><span>.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-footer">
+        <input type="text" [(ngModel)]="chatInput" (keyup.enter)="sendChatMessage()" placeholder="Ask me anything...">
+        <button class="send-btn" (click)="sendChatMessage()">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal-overlay" *ngIf="activeModal !== null" (click)="closeModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 *ngIf="activeModal === 'calculator'">Cost Calculator</h3>
+        <h3 *ngIf="activeModal === 'benchmark'">Infrastructure Benchmark</h3>
+        <h3 *ngIf="activeModal === 'custom_report'">Your Custom Report</h3>
+        <h3 *ngIf="activeModal === 'industry_report'">Industry Report</h3>
+        <h3 *ngIf="activeModal === 'team'">Team Management</h3>
+        
+        <button class="modal-close" (click)="closeModal()">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <!-- Calculator Content -->
+        <div *ngIf="activeModal === 'calculator'" class="modal-content-placeholder">
+          <p>Estimate the financial impact of your idle capacity.</p>
+          <div class="input-group">
+            <label>Total Annual Spend ($)</label>
+            <input type="number" [(ngModel)]="calcSpend" placeholder="e.g. 5000000">
+          </div>
+          <div class="input-group">
+            <label>Estimated Idle CPU (%)</label>
+            <input type="number" [(ngModel)]="calcIdle" placeholder="e.g. 35">
+          </div>
+          <button class="btn-primary" style="margin-top: 1rem;" (click)="calculateImpact()">Calculate Now</button>
+          
+          <div *ngIf="calcResult !== null" style="margin-top: 1.5rem; padding: 1rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--color-green); border-radius: 8px; text-align: center;">
+            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">Estimated Financial Waste</span>
+            <span style="display: block; color: var(--color-gold); font-size: 1.75rem; font-weight: bold;">{{ calcResult | currency:'USD' }}</span>
+          </div>
+        </div>
+
+        <!-- Benchmark Content -->
+        <div *ngIf="activeModal === 'benchmark'" class="modal-content-placeholder">
+          <p>Answer 10 quick questions to assess your maturity.</p>
+          <div class="mock-question">
+            <strong>1. How do you track infrastructure utilization?</strong>
+            <label><input type="radio" name="q1"> Manual spreadsheets</label>
+            <label><input type="radio" name="q1"> Basic monitoring tools</label>
+            <label><input type="radio" name="q1"> Automated real-time analytics</label>
+          </div>
+          <button class="btn-primary" style="margin-top: 1rem;">Next Question</button>
+        </div>
+
+        <!-- Custom Report Content -->
+        <div *ngIf="activeModal === 'custom_report'" class="modal-content-placeholder text-center">
+          <div class="icon-circle large mx-auto">
+            <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-gold)" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <h4>Your PDF is Ready</h4>
+          <p>Based on your recent benchmark, we have compiled a 15-page detailed analysis of your infrastructure.</p>
+          <button class="btn-primary">Download PDF</button>
+        </div>
+
+        <!-- Industry Report Content -->
+        <div *ngIf="activeModal === 'industry_report'" class="modal-content-placeholder text-center">
+           <div class="icon-circle large mx-auto">
+            <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-green)" stroke-width="2" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </div>
+          <h4>State of AI Infrastructure 2024</h4>
+          <p>Explore trends across 500+ global data centers and see where the industry is heading.</p>
+          <button class="btn-primary">Read Online</button>
+        </div>
+        
+        <!-- Team Content -->
+        <div *ngIf="activeModal === 'team'" class="modal-content-placeholder">
+          <p>Invite your team members to collaborate on your benchmark.</p>
+          <div class="input-group">
+            <input type="email" placeholder="colleague@company.com">
+            <button class="btn-primary">Send Invite</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
