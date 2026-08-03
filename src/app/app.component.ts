@@ -48,6 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { text: 'Hello! I am your AI Infrastructure Assistant. How can I help you today?', isBot: true }
   ];
   isChatLoading: boolean = false;
+  isSendingAccessEmail: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -396,38 +397,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   comenzarBenchmark() {
+    if (this.isSendingAccessEmail) return;
+
     if (this.userEmail && this.userEmail.trim() !== '') {
-      fetch('http://localhost:8080/api/auth/request-access', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: this.userEmail.trim() })
-      })
-      .then(res => res.json())
-      .then(authData => {
-        console.log('Solicitud de acceso enviada:', authData);
-        Swal.fire({
-          title: '¡Casi listo!',
-          text: 'Hemos enviado un enlace de activación a tu correo. Por favor, haz clic en él para acceder a tu panel.',
-          icon: 'info',
-          confirmButtonColor: '#22c55e'
-        });
-        
-        this.userEmail = ''; // Limpiar el input para que no quede allí
-      })
-      .catch(error => {
-        console.error('Error solicitando acceso:', error);
-        Swal.fire({
-          title: '¡Ups!',
-          text: 'Tuvimos un problema conectando con el servidor. Por favor, intenta de nuevo.',
-          icon: 'error',
-          confirmButtonColor: '#e74c3c'
-        });
-      });
+      this.procesarEnvioAcceso(this.userEmail.trim());
     } else {
       Swal.fire({
         title: 'Comenzar Gratis',
         text: 'Ingresa tu correo de trabajo para activar tu acceso y comenzar el Benchmark:',
         input: 'email',
+        inputValue: '',
         inputPlaceholder: 'nombre@empresa.com',
         showCancelButton: true,
         confirmButtonText: 'Enviar Enlace',
@@ -441,11 +420,97 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }).then((result) => {
         if (result.isConfirmed && result.value) {
-          this.userEmail = result.value;
-          this.comenzarBenchmark(); // Llama recursivamente ya con el email seteado
+          this.procesarEnvioAcceso(result.value.trim());
         }
       });
     }
+  }
+
+  procesarEnvioAcceso(targetEmail: string) {
+    // Mostrar alerta de cargando
+    Swal.fire({
+      title: 'Enviando...',
+      text: 'Por favor espera un momento.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(null);
+      }
+    });
+
+    this.isSendingAccessEmail = true;
+
+    fetch('http://localhost:8080/api/auth/request-access', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: targetEmail })
+    })
+    .then(res => res.json())
+    .then(authData => {
+      this.isSendingAccessEmail = false;
+      console.log('Respuesta de acceso:', authData);
+      if (authData.requiereActivacion) {
+        Swal.fire({
+          title: '¡Casi listo!',
+          text: 'Hemos enviado un enlace de activación a ' + targetEmail + '. Por favor, haz clic en él para acceder a tu panel.',
+          icon: 'success',
+          confirmButtonColor: '#22c55e'
+        });
+        this.userEmail = ''; // Limpiar
+      } else {
+        // Login directo
+        this.userEmail = authData.email;
+        this.isVerified = true;
+        localStorage.setItem('userEmail', authData.email);
+        localStorage.setItem('isVerified', 'true');
+        if (authData.usuarioId) {
+          localStorage.setItem('usuarioId', String(authData.usuarioId));
+          this.dashboardService.getDashboardData(authData.usuarioId).subscribe({
+            next: (dashData) => {
+              this.handleDashboardData(dashData);
+            },
+            error: (err) => console.error('Error cargando datos de usuario existente:', err)
+          });
+        }
+        Swal.fire({
+          title: '¡Bienvenido de vuelta!',
+          text: 'Hemos iniciado sesión con tu correo: ' + targetEmail,
+          icon: 'success',
+          confirmButtonColor: '#22c55e'
+        });
+      }
+    })
+    .catch(error => {
+      this.isSendingAccessEmail = false;
+      console.error('Error solicitando acceso:', error);
+      Swal.fire({
+        title: '¡Ups!',
+        text: 'Tuvimos un problema conectando con el servidor. Por favor, intenta de nuevo.',
+        icon: 'error',
+        confirmButtonColor: '#e74c3c'
+      });
+    });
+  }
+
+  logout() {
+    this.userEmail = '';
+    this.isVerified = false;
+    this.isAdmin = false;
+    this.dashboardData = null;
+    this.benchmarkPdfUrl = null;
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('isVerified');
+    localStorage.removeItem('usuarioId');
+    if (window.location.search) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    Swal.fire({
+      title: 'Sesión Cerrada',
+      text: 'Has salido y se han limpiado tus datos.',
+      icon: 'success',
+      confirmButtonColor: '#22c55e',
+      timer: 1500,
+      showConfirmButton: false
+    });
   }
 
   // --- Lógica de Outreach (Admin) ---
