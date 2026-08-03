@@ -121,3 +121,8 @@ button {
   animation: smoothReveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Fix SweetAlert z-index behind Modals */
+.swal2-container {
+  z-index: 99999 !important;
+}
+
