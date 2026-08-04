@@ -640,8 +640,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.lensElement.style.left = (x - halfLens) + 'px';
     this.lensElement.style.top = (y - halfLens) + 'px';
 
-    const rx = -x * this.zoomScale + halfLens;
-    const ry = -y * this.zoomScale + halfLens;
+    const rx = -(x + window.scrollX) * this.zoomScale + halfLens;
+    const ry = -(y + window.scrollY) * this.zoomScale + halfLens;
 
     this.clonedContent.style.transform = `translate(${rx}px, ${ry}px) scale(${this.zoomScale})`;
   }

@@ -782,6 +782,7 @@
       gap: 2rem;
     }
   }
+
 }
 
 // Variables de color
@@ -1381,5 +1382,12 @@ $text-dark: #1e293b;
   
   * {
     pointer-events: none !important;
+  }
+}
+
+/* Ocultar la lupa en móviles y tablets verticales */
+@media (max-width: 768px) {
+  .accessibility-zoom-btn {
+    display: none !important;
   }
 }
