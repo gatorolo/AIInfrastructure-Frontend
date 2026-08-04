@@ -1305,3 +1305,49 @@ $text-dark: #1e293b;
     }
   }
 }
+
+/* Accessibility: Zoom Magnifier */
+.accessibility-zoom-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--bg-card, #0a0f0c);
+  border: 2px solid var(--color-green, #22c55e);
+  color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: var(--color-green, #22c55e);
+    color: #000000;
+  }
+
+  &.active {
+    background-color: var(--color-green, #22c55e);
+    color: #000000;
+    box-shadow: 0 0 15px var(--color-green, #22c55e);
+  }
+  
+  .zoom-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Lens specific overrides */
+#lupa-lens-container {
+  box-sizing: border-box;
+  
+  * {
+    pointer-events: none !important;
+  }
+}

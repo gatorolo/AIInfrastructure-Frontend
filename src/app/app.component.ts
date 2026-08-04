@@ -50,6 +50,15 @@ export class AppComponent implements OnInit, OnDestroy {
   isChatLoading: boolean = false;
   isSendingAccessEmail: boolean = false;
 
+  // Accesibilidad: Lupa
+  zoomActivo: boolean = false;
+  private lensElement: HTMLElement | null = null;
+  private clonedContent: HTMLElement | null = null;
+  private mouseMoveListener: ((e: MouseEvent) => void) | null = null;
+  private clickCloseListener: ((e: MouseEvent) => void) | null = null;
+  public zoomScale: number = 2.0;
+  public lensSize: number = 250;
+
   constructor(
     private usuarioService: UsuarioService,
     private chatService: ChatService,
@@ -511,6 +520,130 @@ export class AppComponent implements OnInit, OnDestroy {
       timer: 1500,
       showConfirmButton: false
     });
+  }
+
+  toggleZoom() {
+    this.zoomActivo = !this.zoomActivo;
+    if (this.zoomActivo) {
+      this.iniciarLupa();
+    } else {
+      this.detenerLupa();
+    }
+  }
+
+  private iniciarLupa() {
+    const mainContent = document.getElementById('app-main-content');
+    if (!mainContent) return;
+
+    this.lensElement = document.createElement('div');
+    this.lensElement.id = 'lupa-lens-container';
+    this.lensElement.style.position = 'fixed';
+    this.lensElement.style.border = '4px solid #22c55e'; // Green matching AI theme
+    this.lensElement.style.borderRadius = '50%';
+    this.lensElement.style.width = this.lensSize + 'px';
+    this.lensElement.style.height = this.lensSize + 'px';
+    this.lensElement.style.pointerEvents = 'none';
+    this.lensElement.style.overflow = 'hidden';
+    this.lensElement.style.zIndex = '9999';
+    this.lensElement.style.boxShadow = '0 0 0 9999px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.5), 0 10px 25px rgba(0,0,0,0.5)';
+    this.lensElement.style.backgroundColor = '#0a0f0c'; // Dark theme match
+
+    this.refreshLupa(true);
+    document.body.appendChild(this.lensElement);
+    
+    this.mouseMoveListener = this.onMouseMove.bind(this);
+    document.addEventListener('mousemove', this.mouseMoveListener);
+
+    setTimeout(() => {
+      this.clickCloseListener = () => {
+        this.zoomActivo = false;
+        this.detenerLupa();
+      };
+      document.addEventListener('click', this.clickCloseListener);
+    }, 50);
+  }
+
+  private refreshLupa(initial: boolean = false) {
+    if (!this.zoomActivo || !this.lensElement) return;
+    const mainContent = document.getElementById('app-main-content');
+    if (!mainContent) return;
+
+    const newClone = mainContent.cloneNode(true) as HTMLElement;
+    newClone.style.position = 'absolute';
+    newClone.style.width = mainContent.offsetWidth + 'px';
+    newClone.style.height = mainContent.offsetHeight + 'px';
+    newClone.style.transformOrigin = '0 0';
+    newClone.style.pointerEvents = 'none';
+
+    const originalScrollables = mainContent.querySelectorAll('*');
+    const clonedScrollables = newClone.querySelectorAll('*');
+    for (let i = 0; i < originalScrollables.length; i++) {
+        if (originalScrollables[i].scrollTop > 0 || originalScrollables[i].scrollLeft > 0) {
+            clonedScrollables[i].scrollTop = originalScrollables[i].scrollTop;
+            clonedScrollables[i].scrollLeft = originalScrollables[i].scrollLeft;
+        }
+    }
+    
+    const allClonedElements = newClone.querySelectorAll('*');
+    allClonedElements.forEach(el => el.removeAttribute('id'));
+
+    if (initial) {
+      this.clonedContent = newClone;
+      this.lensElement.appendChild(this.clonedContent);
+    } else {
+      if (this.clonedContent && this.clonedContent.parentNode) {
+        newClone.style.transform = this.clonedContent.style.transform;
+        this.lensElement.replaceChild(newClone, this.clonedContent);
+        this.clonedContent = newClone;
+      }
+    }
+  }
+
+  private detenerLupa() {
+    if (this.lensElement && this.lensElement.parentNode) {
+      this.lensElement.parentNode.removeChild(this.lensElement);
+    }
+    this.lensElement = null;
+    this.clonedContent = null;
+    
+    if (this.mouseMoveListener) {
+      document.removeEventListener('mousemove', this.mouseMoveListener);
+      this.mouseMoveListener = null;
+    }
+    
+    if (this.clickCloseListener) {
+      document.removeEventListener('click', this.clickCloseListener);
+      this.clickCloseListener = null;
+    }
+  }
+
+  private onMouseMove(e: MouseEvent) {
+    if (!this.zoomActivo || !this.lensElement || !this.clonedContent) return;
+
+    const mainContent = document.getElementById('app-main-content');
+    if (mainContent) {
+      const selectors = '.overflow-y-scroll, .overflow-y-auto, .overflow-auto';
+      const origScrollables = mainContent.querySelectorAll(selectors);
+      const cloneScrollables = this.clonedContent.querySelectorAll(selectors);
+      for (let i = 0; i < origScrollables.length; i++) {
+        if (cloneScrollables[i]) {
+          cloneScrollables[i].scrollTop = origScrollables[i].scrollTop;
+          cloneScrollables[i].scrollLeft = origScrollables[i].scrollLeft;
+        }
+      }
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const halfLens = this.lensSize / 2;
+
+    this.lensElement.style.left = (x - halfLens) + 'px';
+    this.lensElement.style.top = (y - halfLens) + 'px';
+
+    const rx = -x * this.zoomScale + halfLens;
+    const ry = -y * this.zoomScale + halfLens;
+
+    this.clonedContent.style.transform = `translate(${rx}px, ${ry}px) scale(${this.zoomScale})`;
   }
 
   // --- Lógica de Outreach (Admin) ---

@@ -1,4 +1,4 @@
-<div class="app-container">
+<div class="app-container" id="app-main-content">
   <!-- Header -->
   <header class="header">
     <div class="logo">
@@ -771,4 +771,14 @@
       </div>
     </div>
   </div>
+  <!-- Botón de Lupa de Accesibilidad (Abajo a la Izquierda) -->
+  <button (click)="toggleZoom()" aria-label="Activar o desactivar zoom de accesibilidad"
+          class="accessibility-zoom-btn"
+          [class.active]="zoomActivo"
+          title="Accessibility: Zoom/Magnifier">
+    <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 7v6m3-3H7"></path>
+    </svg>
+  </button>
 </div>
