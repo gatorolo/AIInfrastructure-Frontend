@@ -12,16 +12,32 @@
       <a href="#" class="active" (click)="$event.preventDefault()">Home</a>
       <a href="#" (click)="openModal('calculator', $event)">Calculator</a>
       <a href="#" (click)="openModal('benchmark', $event)">Benchmark</a>
-      <a href="#" (click)="openModal('industry_report', $event)">Industry Report</a>
+      <a href="#" (click)="openModal('industry_report', $event)"
+        >Industry Report</a
+      >
       <a href="#" (click)="openModal('team', $event)">For Teams</a>
     </nav>
     <div class="header-actions">
       <ng-container *ngIf="!isVerified">
         <a href="#" class="login" (click)="loginAdmin($event)">Login</a>
-        <button class="btn-primary" (click)="comenzarBenchmark()">Get Started Free</button>
+        <button class="btn-primary" (click)="comenzarBenchmark()">
+          Get Started Free
+        </button>
       </ng-container>
       <ng-container *ngIf="isVerified">
-        <span class="user-badge" style="color: var(--text-white); font-size: 0.9rem; margin-right: 1rem; border: 1px solid var(--border-green); padding: 4px 12px; border-radius: 20px; background: rgba(34, 197, 94, 0.1);">{{ userEmail }}</span>
+        <span
+          class="user-badge"
+          style="
+            color: var(--text-white);
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            border: 1px solid var(--border-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(34, 197, 94, 0.1);
+          "
+          >{{ userEmail }}</span
+        >
         <button class="btn-outline btn-small" (click)="logout()">Logout</button>
       </ng-container>
     </div>
@@ -31,56 +47,147 @@
   <section class="hero-section">
     <div class="hero-content">
       <div class="hero-logo-container">
-        <img src="assets/logo_3d.jpg" alt="AI Infrastructure Benchmark Logo" class="hero-logo-image">
+        <img
+          src="assets/logo_3d.jpg"
+          alt="AI Infrastructure Benchmark Logo"
+          class="hero-logo-image"
+        />
       </div>
       <h1 class="hero-title animate-fade-up">
-        Turn Capacity<br>
+        Turn Capacity<br />
         Into <span class="text-gold">Performance</span>
       </h1>
       <p class="hero-subtitle animate-fade-up delay-1">
-        The most comprehensive platform to measure, benchmark<br>
+        The most comprehensive platform to measure, benchmark<br />
         and optimize AI infrastructure efficiency.
       </p>
 
       <div class="hero-features animate-fade-up delay-2">
         <div class="feature-item">
           <div class="icon-circle">
-            <svg style="background-color: rgb(202, 240, 194);" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+            <svg
+              style="background-color: rgb(202, 240, 194)"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+            >
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              <rect x="9" y="9" width="6" height="6"></rect>
+              <line x1="9" y1="1" x2="9" y2="4"></line>
+              <line x1="15" y1="1" x2="15" y2="4"></line>
+              <line x1="9" y1="20" x2="9" y2="23"></line>
+              <line x1="15" y1="20" x2="15" y2="23"></line>
+              <line x1="20" y1="9" x2="23" y2="9"></line>
+              <line x1="20" y1="14" x2="23" y2="14"></line>
+              <line x1="1" y1="9" x2="4" y2="9"></line>
+              <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
           </div>
           <div class="text">
-            <strong>Calculate<br>Your Impact</strong>
-            <span>Quantify idle capacity<br>and financial loss</span>
+            <strong>Calculate<br />Your Impact</strong>
+            <span>Quantify idle capacity<br />and financial loss</span>
           </div>
         </div>
         <div class="feature-item">
           <div class="icon-circle">
-            <svg style="background-color: rgb(202, 240, 194);" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <svg
+              style="background-color: rgb(202, 240, 194)"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+            >
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
           </div>
           <div class="text">
-            <strong>Benchmark<br>Your Maturity</strong>
-            <span>See how you compare<br>to the industry</span>
+            <strong>Benchmark<br />Your Maturity</strong>
+            <span>See how you compare<br />to the industry</span>
           </div>
         </div>
         <div class="feature-item">
           <div class="icon-circle">
-            <svg style="background-color: rgb(202, 240, 194);" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <svg
+              style="background-color: rgb(202, 240, 194)"
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
           </div>
           <div class="text">
-            <strong>Get Your<br>Custom Report</strong>
-            <span>Receive your personalized<br>benchmark PDF</span>
+            <strong>Get Your<br />Custom Report</strong>
+            <span>Receive your personalized<br />benchmark PDF</span>
           </div>
         </div>
       </div>
 
       <div class="hero-cta animate-fade-up delay-3">
         <div class="input-group" *ngIf="!isVerified">
-          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" class="input-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <input type="email" placeholder="Enter your work email" [(ngModel)]="userEmail">
-          <button class="btn-primary" (click)="comenzarBenchmark()">Start Now - It's Free</button>
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            class="input-icon"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input
+            type="email"
+            placeholder="Enter your work email"
+            [(ngModel)]="userEmail"
+          />
+          <button class="btn-primary" (click)="comenzarBenchmark()">
+            Start Now - It's Free
+          </button>
         </div>
-        <div class="logged-in-box" *ngIf="isVerified" style="display: flex; align-items: center; gap: 1rem; background: rgba(10, 15, 12, 0.6); padding: 0.75rem 1.5rem; border-radius: 30px; border: 1px solid var(--border-green); width: fit-content;">
-          <span style="color: var(--text-white); font-size: 0.95rem;">Active Session: <strong>{{ userEmail }}</strong></span>
-          <button class="btn-outline btn-small" (click)="logout()" style="padding: 4px 12px; font-size: 0.85rem;">Logout & Clear</button>
+        <div
+          class="logged-in-box"
+          *ngIf="isVerified"
+          style="
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(10, 15, 12, 0.6);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-green);
+            width: fit-content;
+          "
+        >
+          <span style="color: var(--text-white); font-size: 0.95rem"
+            >Active Session: <strong>{{ userEmail }}</strong></span
+          >
+          <button
+            class="btn-outline btn-small"
+            (click)="logout()"
+            style="padding: 4px 12px; font-size: 0.85rem"
+          >
+            Logout & Clear
+          </button>
         </div>
         <div class="cta-trust">
           <span>✓ No credit card required</span>
@@ -95,359 +202,1461 @@
         <div class="dash-sidebar">
           <div class="dash-logo"></div>
           <div class="dash-nav">
-            <div class="dash-item" [class.active]="activeDashboardTab === 'overview'" (click)="setDashboardTab('overview')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Overview</div>
-            <div class="dash-item" [class.active]="activeDashboardTab === 'calculator'" (click)="setDashboardTab('calculator')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg> Calculator</div>
-            <div class="dash-item" [class.active]="activeDashboardTab === 'benchmark'" (click)="setDashboardTab('benchmark')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Benchmark</div>
-            <div class="dash-item" [class.active]="activeDashboardTab === 'custom_report'" (click)="setDashboardTab('custom_report')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg> Your Report</div>
-            <div class="dash-item" [class.active]="activeDashboardTab === 'industry'" (click)="setDashboardTab('industry')"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg> Industry Report</div>
-            <div class="dash-item" *ngIf="isAdmin" [class.active]="activeDashboardTab === 'outreach'" (click)="setDashboardTab('outreach')"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> Outreach (Admin)</div>
-            <div class="dash-item" (click)="openModal('resources', $event)" style="cursor: pointer;"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg> Resources</div>
+            <div
+              class="dash-item"
+              [class.active]="activeDashboardTab === 'overview'"
+              (click)="setDashboardTab('overview')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              </svg>
+              Overview
+            </div>
+            <div
+              class="dash-item"
+              [class.active]="activeDashboardTab === 'calculator'"
+              (click)="setDashboardTab('calculator')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+              </svg>
+              Calculator
+            </div>
+            <div
+              class="dash-item"
+              [class.active]="activeDashboardTab === 'benchmark'"
+              (click)="setDashboardTab('benchmark')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              Benchmark
+            </div>
+            <div
+              class="dash-item"
+              [class.active]="activeDashboardTab === 'custom_report'"
+              (click)="setDashboardTab('custom_report')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+              </svg>
+              Your Report
+            </div>
+            <div
+              class="dash-item"
+              [class.active]="activeDashboardTab === 'industry'"
+              (click)="setDashboardTab('industry')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                ></path>
+              </svg>
+              Industry Report
+            </div>
+            <div
+              class="dash-item"
+              *ngIf="isAdmin"
+              [class.active]="activeDashboardTab === 'outreach'"
+              (click)="setDashboardTab('outreach')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              Outreach (Admin)
+            </div>
+            <div
+              class="dash-item"
+              (click)="openModal('resources', $event)"
+              style="cursor: pointer"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Resources
+            </div>
           </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="dash-main">
           <div *ngIf="activeDashboardTab === 'overview'">
             <div class="dash-header">
               <h2>Your Benchmark Overview</h2>
-              <a *ngIf="benchmarkPdfUrl" [href]="benchmarkPdfUrl" target="_blank" class="btn-outline btn-small" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download PDF
+              <a
+                *ngIf="benchmarkPdfUrl"
+                [href]="benchmarkPdfUrl"
+                target="_blank"
+                class="btn-outline btn-small"
+                style="
+                  text-decoration: none;
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
               </a>
             </div>
-          
-          <div style="position: relative;">
-            <!-- Lock Overlay if not verified -->
-            <div *ngIf="!isVerified && !isAdmin" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; background: rgba(10, 15, 12, 0.9); padding: 2rem; border-radius: 12px; border: 1px solid var(--color-gold); box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-              <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-gold)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <h3 style="color: var(--color-gold); margin-bottom: 0.5rem;">Resultados Bloqueados</h3>
-              <p style="color: white; margin-bottom: 1rem;">Debes activar tu cuenta para acceder al reporte completo.</p>
-              
-              <div class="input-group" style="display: flex; gap: 10px; max-width: 400px; margin: 0 auto;">
-                <input type="email" [(ngModel)]="calcTollEmail" placeholder="Ingresa tu correo" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; flex: 1;">
-                <button class="btn-primary" (click)="revealImpact()" [disabled]="isRevealingImpact">
-                  {{ isRevealingImpact ? 'Enviando...' : 'Solicitar Acceso' }}
-                </button>
-              </div>
-            </div>
 
-            <div class="dash-metrics" [ngStyle]="{'filter': (!isVerified && !isAdmin) ? 'blur(8px)' : 'none', 'pointer-events': (!isVerified && !isAdmin) ? 'none' : 'auto'}">
-              <div class="metric-card wide">
-              <div class="pos-info">
-                <span class="label">Industry Position</span>
-                <span class="value text-gold">Top {{ dashboardData?.posicionIndustria || '18' }}%</span>
-                <span class="desc">You're performing better than<br>82% of data centers globally</span>
+            <div style="position: relative">
+              <!-- Lock Overlay if not verified -->
+              <div
+                *ngIf="!isVerified && !isAdmin"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  z-index: 10;
+                  text-align: center;
+                  background: rgba(10, 15, 12, 0.9);
+                  padding: 2rem;
+                  border-radius: 12px;
+                  border: 1px solid var(--color-gold);
+                  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="48"
+                  height="48"
+                  stroke="var(--color-gold)"
+                  stroke-width="2"
+                  fill="none"
+                  style="margin-bottom: 1rem"
+                >
+                  <rect
+                    x="3"
+                    y="11"
+                    width="18"
+                    height="11"
+                    rx="2"
+                    ry="2"
+                  ></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <h3 style="color: var(--color-gold); margin-bottom: 0.5rem">
+                  Resultados Bloqueados
+                </h3>
+                <p style="color: white; margin-bottom: 1rem">
+                  Debes activar tu cuenta para acceder al reporte completo.
+                </p>
+
+                <div
+                  class="input-group"
+                  style="
+                    display: flex;
+                    gap: 10px;
+                    max-width: 400px;
+                    margin: 0 auto;
+                  "
+                >
+                  <input
+                    type="email"
+                    [(ngModel)]="calcTollEmail"
+                    placeholder="Ingresa tu correo"
+                    style="
+                      padding: 0.75rem;
+                      border-radius: 6px;
+                      border: 1px solid var(--border-green);
+                      background: var(--bg-card-light);
+                      color: white;
+                      flex: 1;
+                    "
+                  />
+                  <button
+                    class="btn-primary"
+                    (click)="revealImpact()"
+                    [disabled]="isRevealingImpact"
+                  >
+                    {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
+                  </button>
+                </div>
               </div>
-              <div class="score-chart">
-                <div class="gauge">
-                  <div class="gauge-fill"></div>
-                  <div class="gauge-center">
-                    <span class="score-num">{{ dashboardData?.scoreEficiencia || '82' }}</span>
-                    <span class="score-max">/100</span>
+
+              <div
+                class="dash-metrics"
+                [ngStyle]="{
+                  filter: !isVerified && !isAdmin ? 'blur(8px)' : 'none',
+                  'pointer-events': !isVerified && !isAdmin ? 'none' : 'auto',
+                }"
+              >
+                <div class="metric-card wide">
+                  <div class="pos-info">
+                    <span class="label">Industry Position</span>
+                    <span class="value text-gold"
+                      >Top {{ dashboardData?.posicionIndustria || "18" }}%</span
+                    >
+                    <span class="desc"
+                      >You're performing better than<br />82% of data centers
+                      globally</span
+                    >
+                  </div>
+                  <div class="score-chart">
+                    <div class="gauge">
+                      <div class="gauge-fill"></div>
+                      <div class="gauge-center">
+                        <span class="score-num">{{
+                          dashboardData?.scoreEficiencia || "82"
+                        }}</span>
+                        <span class="score-max">/100</span>
+                      </div>
+                    </div>
+                    <span class="score-label">Overall Maturity Score</span>
                   </div>
                 </div>
-                <span class="score-label">Overall Maturity Score</span>
-              </div>
-            </div>
-            
-            <div class="metric-card">
-              <span class="label">Maturity Level</span>
-              <span class="value text-gold">{{ dashboardData?.nivelMadurez || 'Advanced' }}</span>
-              <span class="desc">Strong operational foundation<br>with optimization opportunities</span>
-              <div class="crown-icon">
-                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="var(--color-gold)" stroke-width="2" fill="none"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>
-              </div>
-            </div>
-          </div>
 
-          <div class="dash-kpis" [ngStyle]="{'filter': (!isVerified && !isAdmin) ? 'blur(8px)' : 'none', 'pointer-events': (!isVerified && !isAdmin) ? 'none' : 'auto'}">
-            <h3>Key Efficiency KPIs</h3>
-            <div class="kpi-grid">
-              <div class="kpi-box">
-                <span class="label">Annual Waste</span>
-                <span class="value">${{ dashboardData?.annualWaste || '2.45' }}M</span>
-                <span class="desc">32% of total spend</span>
-                <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+                <div class="metric-card">
+                  <span class="label">Maturity Level</span>
+                  <span class="value text-gold">{{
+                    dashboardData?.nivelMadurez || "Advanced"
+                  }}</span>
+                  <span class="desc"
+                    >Strong operational foundation<br />with optimization
+                    opportunities</span
+                  >
+                  <div class="crown-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="var(--color-gold)"
+                      stroke-width="2"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
               </div>
-              <div class="kpi-box">
-                <span class="label">Idle Capacity</span>
-                <span class="value">{{ dashboardData?.idleCapacityPct || '38' }}%</span>
-                <span class="desc">Available but unutilized</span>
-                <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
-              </div>
-              <div class="kpi-box">
-                <span class="label">Power Usage</span>
-                <span class="value">{{ dashboardData?.powerUsagePue || '1.42' }} PUE</span>
-                <span class="desc">Above industry avg.</span>
-                <div class="trend down text-gold"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg></div>
-              </div>
-              <div class="kpi-box">
-                <span class="label">Efficiency Score</span>
-                <span class="value">{{ dashboardData?.scoreEficiencia || '72' }} <span class="max">/100</span></span>
-                <span class="desc">Good</span>
-                <div class="trend up"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+
+              <div
+                class="dash-kpis"
+                [ngStyle]="{
+                  filter: !isVerified && !isAdmin ? 'blur(8px)' : 'none',
+                  'pointer-events': !isVerified && !isAdmin ? 'none' : 'auto',
+                }"
+              >
+                <h3>Key Efficiency KPIs</h3>
+                <div class="kpi-grid">
+                  <div class="kpi-box">
+                    <span class="label">Annual Waste</span>
+                    <span class="value"
+                      >${{ dashboardData?.annualWaste || "2.45" }}M</span
+                    >
+                    <span class="desc">32% of total spend</span>
+                    <div class="trend up">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                      >
+                        <polyline
+                          points="23 6 13.5 15.5 8.5 10.5 1 18"
+                        ></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="kpi-box">
+                    <span class="label">Idle Capacity</span>
+                    <span class="value"
+                      >{{ dashboardData?.idleCapacityPct || "38" }}%</span
+                    >
+                    <span class="desc">Available but unutilized</span>
+                    <div class="trend up">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                      >
+                        <polyline
+                          points="23 6 13.5 15.5 8.5 10.5 1 18"
+                        ></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="kpi-box">
+                    <span class="label">Power Usage</span>
+                    <span class="value"
+                      >{{ dashboardData?.powerUsagePue || "1.42" }} PUE</span
+                    >
+                    <span class="desc">Above industry avg.</span>
+                    <div class="trend down text-gold">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                      >
+                        <polyline
+                          points="23 18 13.5 8.5 8.5 13.5 1 6"
+                        ></polyline>
+                        <polyline points="17 18 23 18 23 12"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="kpi-box">
+                    <span class="label">Efficiency Score</span>
+                    <span class="value"
+                      >{{ dashboardData?.scoreEficiencia || "72" }}
+                      <span class="max">/100</span></span
+                    >
+                    <span class="desc">Good</span>
+                    <div class="trend up">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        fill="none"
+                      >
+                        <polyline
+                          points="23 6 13.5 15.5 8.5 10.5 1 18"
+                        ></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          </div>
-          
-          <div class="dash-footer" *ngIf="benchmarkPdfUrl">
-            <div class="footer-info">
-              <div class="date-info">
-                <strong>Benchmark Completed</strong>
-                <span>May 15, 2024</span>
+
+            <div class="dash-footer" *ngIf="benchmarkPdfUrl">
+              <div class="footer-info">
+                <div class="date-info">
+                  <strong>Benchmark Completed</strong>
+                  <span>May 15, 2024</span>
+                </div>
+                <div class="report-info">
+                  <strong>Your custom report is ready!</strong>
+                  <span
+                    >Download your PDF for full insights and
+                    recommendations.</span
+                  >
+                </div>
               </div>
-              <div class="report-info">
-                <strong>Your custom report is ready!</strong>
-                <span>Download your PDF for full insights and recommendations.</span>
-              </div>
+              <a
+                [href]="benchmarkPdfUrl"
+                target="_blank"
+                class="btn-primary btn-small"
+                style="
+                  text-decoration: none;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                "
+                >Download PDF
+                <svg
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line></svg
+              ></a>
             </div>
-            <a [href]="benchmarkPdfUrl" target="_blank" class="btn-primary btn-small" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">Download PDF <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
-          </div>
           </div>
 
           <!-- Calculator Tab Content -->
-          <div *ngIf="activeDashboardTab === 'calculator'" class="dash-tab-content">
+          <div
+            *ngIf="activeDashboardTab === 'calculator'"
+            class="dash-tab-content"
+          >
             <div class="dash-header">
               <h2>Cost Calculator</h2>
             </div>
             <div class="metric-card">
-              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Estimate the financial impact of your idle capacity directly here.</p>
-              <div class="input-group" style="margin-bottom: 1rem;">
-                <label style="color: var(--text-muted); display:block; margin-bottom: 0.5rem;">Total Annual Spend ($)</label>
-                <input type="number" [(ngModel)]="calcSpend" placeholder="e.g. 5000000" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%; max-width: 300px;">
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+                Estimate the financial impact of your idle capacity directly
+                here.
+              </p>
+              <div class="input-group" style="margin-bottom: 1rem">
+                <label
+                  style="
+                    color: var(--text-muted);
+                    display: block;
+                    margin-bottom: 0.5rem;
+                  "
+                  >Total Annual Spend ($)</label
+                >
+                <input
+                  type="number"
+                  [(ngModel)]="calcSpend"
+                  placeholder="e.g. 5000000"
+                  style="
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    border: 1px solid var(--border-green);
+                    background: var(--bg-card-light);
+                    color: white;
+                    width: 100%;
+                    max-width: 300px;
+                  "
+                />
               </div>
-              <div class="input-group" style="margin-bottom: 1.5rem;">
-                <label style="color: var(--text-muted); display:block; margin-bottom: 0.5rem;">Estimated Idle CPU (%)</label>
-                <input type="number" [(ngModel)]="calcIdle" placeholder="e.g. 35" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%; max-width: 300px;">
+              <div class="input-group" style="margin-bottom: 1.5rem">
+                <label
+                  style="
+                    color: var(--text-muted);
+                    display: block;
+                    margin-bottom: 0.5rem;
+                  "
+                  >Estimated Idle CPU (%)</label
+                >
+                <input
+                  type="number"
+                  [(ngModel)]="calcIdle"
+                  placeholder="e.g. 35"
+                  style="
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    border: 1px solid var(--border-green);
+                    background: var(--bg-card-light);
+                    color: white;
+                    width: 100%;
+                    max-width: 300px;
+                  "
+                />
               </div>
-              <button class="btn-primary" (click)="calculateImpact()">Calculate Impact</button>
-              
+              <button class="btn-primary" (click)="calculateImpact()">
+                Calculate Impact
+              </button>
+
               <!-- Peaje (Toll) -->
-              <div *ngIf="isCalculatorTollActive" style="margin-top: 2rem; padding: 1.5rem; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-green); border-radius: 8px;">
-                <h4 style="color: var(--color-green); margin-bottom: 0.5rem;">Tu cálculo está listo</h4>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Para ver el impacto financiero real, por favor confirma tu correo de trabajo.</p>
-                <div class="input-group" style="display: flex; gap: 10px;">
-                  <input type="email" [(ngModel)]="calcTollEmail" placeholder="Enter your work email" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; flex: 1; max-width: 300px;">
-                  <button class="btn-primary" (click)="revealImpact()" [disabled]="isRevealingImpact">
-                    {{ isRevealingImpact ? 'Procesando...' : 'Ver Impacto' }}
+              <div
+                *ngIf="isCalculatorTollActive"
+                style="
+                  margin-top: 2rem;
+                  padding: 1.5rem;
+                  background: rgba(0, 0, 0, 0.5);
+                  border: 1px solid var(--border-green);
+                  border-radius: 8px;
+                "
+              >
+                <h4 style="color: var(--color-green); margin-bottom: 0.5rem">
+                  Tu cálculo está listo
+                </h4>
+                <p
+                  style="
+                    color: var(--text-muted);
+                    margin-bottom: 1rem;
+                    font-size: 0.9rem;
+                  "
+                >
+                  Para ver el impacto financiero real, por favor confirma tu
+                  correo de trabajo.
+                </p>
+                <div class="input-group" style="display: flex; gap: 10px">
+                  <input
+                    type="email"
+                    [(ngModel)]="calcTollEmail"
+                    placeholder="Enter your work email"
+                    style="
+                      padding: 0.75rem;
+                      border-radius: 6px;
+                      border: 1px solid var(--border-green);
+                      background: var(--bg-card-light);
+                      color: white;
+                      flex: 1;
+                      max-width: 300px;
+                    "
+                  />
+                  <button
+                    class="btn-primary"
+                    (click)="revealImpact()"
+                    [disabled]="isRevealingImpact"
+                  >
+                    {{ isRevealingImpact ? "Procesando..." : "Ver Impacto" }}
                   </button>
                 </div>
               </div>
 
               <!-- Resultado Final -->
-              <div *ngIf="calcResult !== null && !isCalculatorTollActive && (isVerified || isAdmin)" style="margin-top: 2rem; padding: 1.5rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--color-green); border-radius: 8px;">
-                <span style="display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Estimated Financial Waste</span>
-                <span style="display: block; color: var(--color-gold); font-size: 2rem; font-weight: bold;">{{ calcResult | currency:'USD' }}</span>
+              <div
+                *ngIf="
+                  calcResult !== null &&
+                  !isCalculatorTollActive &&
+                  (isVerified || isAdmin)
+                "
+                style="
+                  margin-top: 2rem;
+                  padding: 1.5rem;
+                  background: rgba(34, 197, 94, 0.1);
+                  border: 1px solid var(--color-green);
+                  border-radius: 8px;
+                "
+              >
+                <span
+                  style="
+                    display: block;
+                    color: var(--text-muted);
+                    font-size: 0.9rem;
+                    margin-bottom: 0.5rem;
+                  "
+                  >Estimated Financial Waste</span
+                >
+                <span
+                  style="
+                    display: block;
+                    color: var(--color-gold);
+                    font-size: 2rem;
+                    font-weight: bold;
+                  "
+                  >{{ calcResult | currency: "USD" }}</span
+                >
               </div>
             </div>
           </div>
 
           <!-- Benchmark Tab Content -->
-          <div *ngIf="activeDashboardTab === 'benchmark'" class="dash-tab-content">
+          <div
+            *ngIf="activeDashboardTab === 'benchmark'"
+            class="dash-tab-content"
+          >
             <div class="dash-header">
               <h2>Infrastructure Benchmark</h2>
             </div>
-            
+
             <!-- Bloqueo de Benchmark -->
-            <div *ngIf="!isVerified && !isAdmin" class="metric-card" style="text-align: center; padding: 3rem 1rem;">
-              <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-gold)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <h3 style="color: var(--color-gold); margin-bottom: 1rem;">Acceso Restringido</h3>
-              <p style="color: var(--text-muted); margin-bottom: 2rem;">Debes activar tu cuenta para realizar el benchmark y obtener el reporte de IA.</p>
-              
-              <div class="input-group" style="display: flex; gap: 10px; max-width: 400px; margin: 0 auto;">
-                <input type="email" [(ngModel)]="calcTollEmail" placeholder="Ingresa tu correo" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; flex: 1;">
-                <button class="btn-primary" (click)="revealImpact()" [disabled]="isRevealingImpact">
-                  {{ isRevealingImpact ? 'Enviando...' : 'Solicitar Acceso' }}
+            <div
+              *ngIf="!isVerified && !isAdmin"
+              class="metric-card"
+              style="text-align: center; padding: 3rem 1rem"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                stroke="var(--color-gold)"
+                stroke-width="2"
+                fill="none"
+                style="margin-bottom: 1rem"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <h3 style="color: var(--color-gold); margin-bottom: 1rem">
+                Acceso Restringido
+              </h3>
+              <p style="color: var(--text-muted); margin-bottom: 2rem">
+                Debes activar tu cuenta para realizar el benchmark y obtener el
+                reporte de IA.
+              </p>
+
+              <div
+                class="input-group"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  max-width: 400px;
+                  margin: 0 auto;
+                "
+              >
+                <input
+                  type="email"
+                  [(ngModel)]="calcTollEmail"
+                  placeholder="Ingresa tu correo"
+                  style="
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    border: 1px solid var(--border-green);
+                    background: var(--bg-card-light);
+                    color: white;
+                    flex: 1;
+                  "
+                />
+                <button
+                  class="btn-primary"
+                  (click)="revealImpact()"
+                  [disabled]="isRevealingImpact"
+                >
+                  {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
                 </button>
               </div>
             </div>
 
-            <div class="metric-card" *ngIf="!isBenchmarkLoading && (isVerified || isAdmin)">
-              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Answer the following questions to assess your maturity.</p>
-              
+            <div
+              class="metric-card"
+              *ngIf="!isBenchmarkLoading && (isVerified || isAdmin)"
+            >
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+                Answer the following questions to assess your maturity.
+              </p>
+
               <!-- Pregunta 1 -->
-              <div style="background: var(--bg-card); border: 1px solid var(--border-green); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-                <strong style="display: block; margin-bottom: 1rem;">1. What is your primary cooling mechanism?</strong>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q1" [(ngModel)]="benchQ1" value="a"> Basic CRAC units</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q1" [(ngModel)]="benchQ1" value="b"> Hot/Cold aisle containment</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q1" [(ngModel)]="benchQ1" value="c"> Liquid cooling (Direct-to-chip)</label>
+              <div
+                style="
+                  background: var(--bg-card);
+                  border: 1px solid var(--border-green);
+                  padding: 1.5rem;
+                  border-radius: 8px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <strong style="display: block; margin-bottom: 1rem"
+                  >1. What is your primary cooling mechanism?</strong
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q1"
+                    [(ngModel)]="benchQ1"
+                    value="a"
+                  />
+                  Basic CRAC units</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q1"
+                    [(ngModel)]="benchQ1"
+                    value="b"
+                  />
+                  Hot/Cold aisle containment</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q1"
+                    [(ngModel)]="benchQ1"
+                    value="c"
+                  />
+                  Liquid cooling (Direct-to-chip)</label
+                >
               </div>
 
               <!-- Pregunta 2 -->
-              <div style="background: var(--bg-card); border: 1px solid var(--border-green); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-                <strong style="display: block; margin-bottom: 1rem;">2. How do you track infrastructure utilization?</strong>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q2" [(ngModel)]="benchQ2" value="a"> Manual spreadsheets</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q2" [(ngModel)]="benchQ2" value="b"> Basic monitoring tools</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q2" [(ngModel)]="benchQ2" value="c"> AI-driven real-time analytics</label>
+              <div
+                style="
+                  background: var(--bg-card);
+                  border: 1px solid var(--border-green);
+                  padding: 1.5rem;
+                  border-radius: 8px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <strong style="display: block; margin-bottom: 1rem"
+                  >2. How do you track infrastructure utilization?</strong
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q2"
+                    [(ngModel)]="benchQ2"
+                    value="a"
+                  />
+                  Manual spreadsheets</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q2"
+                    [(ngModel)]="benchQ2"
+                    value="b"
+                  />
+                  Basic monitoring tools</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q2"
+                    [(ngModel)]="benchQ2"
+                    value="c"
+                  />
+                  AI-driven real-time analytics</label
+                >
               </div>
 
               <!-- Pregunta 3 -->
-              <div style="background: var(--bg-card); border: 1px solid var(--border-green); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
-                <strong style="display: block; margin-bottom: 1rem;">3. What is your automation level for workload deployment?</strong>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q3" [(ngModel)]="benchQ3" value="a"> Fully manual</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q3" [(ngModel)]="benchQ3" value="b"> Script-based</label>
-                <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); margin-bottom: 0.5rem;"><input type="radio" name="q3" [(ngModel)]="benchQ3" value="c"> Kubernetes/Dynamic Orchestration</label>
+              <div
+                style="
+                  background: var(--bg-card);
+                  border: 1px solid var(--border-green);
+                  padding: 1.5rem;
+                  border-radius: 8px;
+                  margin-bottom: 1rem;
+                "
+              >
+                <strong style="display: block; margin-bottom: 1rem"
+                  >3. What is your automation level for workload
+                  deployment?</strong
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q3"
+                    [(ngModel)]="benchQ3"
+                    value="a"
+                  />
+                  Fully manual</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q3"
+                    [(ngModel)]="benchQ3"
+                    value="b"
+                  />
+                  Script-based</label
+                >
+                <label
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: var(--text-muted);
+                    margin-bottom: 0.5rem;
+                  "
+                  ><input
+                    type="radio"
+                    name="q3"
+                    [(ngModel)]="benchQ3"
+                    value="c"
+                  />
+                  Kubernetes/Dynamic Orchestration</label
+                >
               </div>
 
-              <button class="btn-primary" style="width: 100%" (click)="submitBenchmark()">Generar Análisis con IA</button>
+              <button
+                class="btn-primary"
+                style="width: 100%"
+                (click)="submitBenchmark()"
+              >
+                Generar Análisis con IA
+              </button>
             </div>
 
             <!-- Loading State -->
-            <div class="metric-card" *ngIf="isBenchmarkLoading" style="text-align: center; padding: 4rem 1rem;">
-              <div class="icon-circle large mx-auto" style="animation: pulse 1.5s infinite; border-color: var(--color-green);">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-green)" stroke-width="2" fill="none"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+            <div
+              class="metric-card"
+              *ngIf="isBenchmarkLoading"
+              style="text-align: center; padding: 4rem 1rem"
+            >
+              <div
+                class="icon-circle large mx-auto"
+                style="
+                  animation: pulse 1.5s infinite;
+                  border-color: var(--color-green);
+                "
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="32"
+                  height="32"
+                  stroke="var(--color-green)"
+                  stroke-width="2"
+                  fill="none"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+                </svg>
               </div>
-              <h3 style="margin-top: 1.5rem; color: var(--color-gold);">Analizando métricas con IA...</h3>
-              <p style="color: var(--text-muted);">Gemini está procesando tus respuestas y construyendo tu PDF personalizado.</p>
+              <h3 style="margin-top: 1.5rem; color: var(--color-gold)">
+                Analizando métricas con IA...
+              </h3>
+              <p style="color: var(--text-muted)">
+                Gemini está procesando tus respuestas y construyendo tu PDF
+                personalizado.
+              </p>
             </div>
           </div>
 
           <!-- Custom Report Tab Content -->
-          <div *ngIf="activeDashboardTab === 'custom_report'" class="dash-tab-content">
+          <div
+            *ngIf="activeDashboardTab === 'custom_report'"
+            class="dash-tab-content"
+          >
             <div class="dash-header">
               <h2>Your Custom Report</h2>
             </div>
-            <div class="metric-card" style="text-align: center; padding: 3rem 1rem;">
-              <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-gold)" stroke-width="2" fill="none" style="margin-bottom: 1rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-              <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Ready for Download</h3>
-              <p style="color: var(--text-muted); margin-bottom: 2rem;">Your personalized PDF with strategic insights and AI-generated recommendations.</p>
-              <a *ngIf="benchmarkPdfUrl" [href]="benchmarkPdfUrl" target="_blank" class="btn-primary" style="display: inline-block; text-decoration: none;">Download PDF Report</a>
-              <p *ngIf="!benchmarkPdfUrl" style="color: var(--color-gold);">Please complete the Benchmark first.</p>
+            <div
+              class="metric-card"
+              style="text-align: center; padding: 3rem 1rem"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                stroke="var(--color-gold)"
+                stroke-width="2"
+                fill="none"
+                style="margin-bottom: 1rem"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <h3 style="font-size: 1.5rem; margin-bottom: 1rem">
+                Ready for Download
+              </h3>
+              <p style="color: var(--text-muted); margin-bottom: 2rem">
+                Your personalized PDF with strategic insights and AI-generated
+                recommendations.
+              </p>
+              <a
+                *ngIf="benchmarkPdfUrl"
+                [href]="benchmarkPdfUrl"
+                target="_blank"
+                class="btn-primary"
+                style="display: inline-block; text-decoration: none"
+                >Download PDF Report</a
+              >
+              <p *ngIf="!benchmarkPdfUrl" style="color: var(--color-gold)">
+                Please complete the Benchmark first.
+              </p>
             </div>
           </div>
 
           <!-- Industry Report Tab -->
-          <div class="dash-tab-content" *ngIf="activeDashboardTab === 'industry'">
-            <div class="dash-header">
-              <h2>Global Industry Report</h2>
-              <a href="http://localhost:8080/api/benchmark/industry-report" target="_blank" class="btn-outline btn-small" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download PDF
-              </a>
+          <div
+            class="dash-tab-content"
+            *ngIf="activeDashboardTab === 'industry'"
+          >
+            <!-- Bloqueo de Industry Report -->
+            <div
+              *ngIf="!isVerified && !isAdmin"
+              class="metric-card"
+              style="text-align: center; padding: 3rem 1rem"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                stroke="var(--color-gold)"
+                stroke-width="2"
+                fill="none"
+                style="margin-bottom: 1rem"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <h3 style="color: var(--color-gold); margin-bottom: 1rem">
+                Acceso Restringido
+              </h3>
+              <p style="color: var(--text-muted); margin-bottom: 2rem">
+                Debes activar tu cuenta para acceder a las métricas del Reporte
+                Global de la Industria.
+              </p>
+
+              <div
+                class="input-group"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  max-width: 400px;
+                  margin: 0 auto;
+                "
+              >
+                <input
+                  type="email"
+                  [(ngModel)]="calcTollEmail"
+                  placeholder="Ingresa tu correo"
+                  style="
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    border: 1px solid var(--border-green);
+                    background: var(--bg-card-light);
+                    color: white;
+                    flex: 1;
+                  "
+                />
+                <button
+                  class="btn-primary"
+                  (click)="revealImpact()"
+                  [disabled]="isRevealingImpact"
+                >
+                  {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
+                </button>
+              </div>
             </div>
-            
-            <div class="kpi-grid" style="margin-bottom: 2rem;">
-              <!-- PUE Comparison -->
-              <div class="metric-card">
-                <h4 style="color: var(--color-green); margin-bottom: 1rem;">Power Usage Effectiveness (PUE)</h4>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span>Your PUE:</span>
-                  <strong style="color: var(--color-gold);">{{ dashboardData?.powerUsagePue || '1.42' }} PUE</strong>
-                </div>
-                <div style="background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem;">
-                  <div style="background: var(--color-green); height: 100%; width: 75%;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span>Global Average:</span>
-                  <strong>1.58 PUE</strong>
-                </div>
-                <div style="background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem;">
-                  <div style="width: 63%; background: #e74c3c; height: 100%;"></div>
-                </div>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1.5rem;">You are operating with a power usage efficiency level superior to the global data center average.</p>
+
+            <!-- Contenido del Industry Report (Sólo si está verificado) -->
+            <ng-container *ngIf="isVerified || isAdmin">
+              <div class="dash-header">
+                <h2>Global Industry Report</h2>
+                <a
+                  href="http://localhost:8080/api/benchmark/industry-report"
+                  target="_blank"
+                  class="btn-outline btn-small"
+                  style="
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                  "
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="14"
+                    height="14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    fill="none"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download PDF
+                </a>
               </div>
 
-              <!-- Idle Capacity Comparison -->
-              <div class="metric-card">
-                <h4 style="color: var(--color-green); margin-bottom: 1rem;">Idle Computing Capacity</h4>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span>Your Idle Capacity:</span>
-                  <strong style="color: #e74c3c;">{{ dashboardData?.idleCapacityPct || '38' }}%</strong>
+              <div class="kpi-grid" style="margin-bottom: 2rem">
+                <!-- PUE Comparison -->
+                <div class="metric-card">
+                  <h4 style="color: var(--color-green); margin-bottom: 1rem">
+                    Power Usage Effectiveness (PUE)
+                  </h4>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    <span>Your PUE:</span>
+                    <strong style="color: var(--color-gold)"
+                      >{{ dashboardData?.powerUsagePue || "1.42" }} PUE</strong
+                    >
+                  </div>
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.1);
+                      height: 8px;
+                      border-radius: 4px;
+                      overflow: hidden;
+                      margin-bottom: 1rem;
+                    "
+                  >
+                    <div
+                      style="
+                        background: var(--color-green);
+                        height: 100%;
+                        width: 75%;
+                      "
+                    ></div>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span>Global Average:</span>
+                    <strong>1.58 PUE</strong>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.1);
+                      height: 8px;
+                      border-radius: 4px;
+                      overflow: hidden;
+                      margin-top: 0.5rem;
+                    "
+                  >
+                    <div
+                      style="width: 63%; background: #e74c3c; height: 100%"
+                    ></div>
+                  </div>
+                  <p
+                    style="
+                      color: var(--text-muted);
+                      font-size: 0.8rem;
+                      margin-top: 1.5rem;
+                    "
+                  >
+                    You are operating with a power usage efficiency level
+                    superior to the global data center average.
+                  </p>
                 </div>
-                <div style="background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 1rem;">
-                  <div [style.width.%]="dashboardData?.idleCapacityPct || 38" style="background: #e74c3c; height: 100%;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <span>Global Average:</span>
-                  <strong>30%</strong>
-                </div>
-                <div style="background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 0.5rem;">
-                  <div style="width: 30%; background: var(--color-green); height: 100%;"></div>
-                </div>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1.5rem;">Your unutilized computing capacity is currently above the optimal industry standard.</p>
-              </div>
-            </div>
 
-            <!-- Score Distribution -->
-            <div class="metric-card" style="margin-bottom: 2rem;">
-              <h4 style="color: var(--color-green); margin-bottom: 1.5rem;">Global Score Distribution (Maturity Tiers)</h4>
-              <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <div>
-                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.25rem;">
-                    <span>Advanced (Score > 80)</span>
-                    <span>25% of Companies</span>
+                <!-- Idle Capacity Comparison -->
+                <div class="metric-card">
+                  <h4 style="color: var(--color-green); margin-bottom: 1rem">
+                    Idle Computing Capacity
+                  </h4>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    <span>Your Idle Capacity:</span>
+                    <strong style="color: #e74c3c"
+                      >{{ dashboardData?.idleCapacityPct || "38" }}%</strong
+                    >
                   </div>
-                  <div style="background: rgba(255, 255, 255, 0.1); height: 10px; border-radius: 5px; overflow: hidden;">
-                    <div style="width: 25%; background: var(--color-gold); height: 100%;"></div>
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.1);
+                      height: 8px;
+                      border-radius: 4px;
+                      overflow: hidden;
+                      margin-bottom: 1rem;
+                    "
+                  >
+                    <div
+                      [style.width.%]="dashboardData?.idleCapacityPct || 38"
+                      style="background: #e74c3c; height: 100%"
+                    ></div>
                   </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <span>Global Average:</span>
+                    <strong>30%</strong>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(255, 255, 255, 0.1);
+                      height: 8px;
+                      border-radius: 4px;
+                      overflow: hidden;
+                      margin-top: 0.5rem;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 30%;
+                        background: var(--color-green);
+                        height: 100%;
+                      "
+                    ></div>
+                  </div>
+                  <p
+                    style="
+                      color: var(--text-muted);
+                      font-size: 0.8rem;
+                      margin-top: 1.5rem;
+                    "
+                  >
+                    Your unutilized computing capacity is currently above the
+                    optimal industry standard.
+                  </p>
                 </div>
-                <div>
-                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.25rem;">
-                    <span>Intermediate (Score 50-80)</span>
-                    <span>50% of Companies</span>
+              </div>
+
+              <!-- Score Distribution -->
+              <div class="metric-card" style="margin-bottom: 2rem">
+                <h4 style="color: var(--color-green); margin-bottom: 1.5rem">
+                  Global Score Distribution (Maturity Tiers)
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem">
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 0.9rem;
+                        margin-bottom: 0.25rem;
+                      "
+                    >
+                      <span>Advanced (Score > 80)</span>
+                      <span>25% of Companies</span>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.1);
+                        height: 10px;
+                        border-radius: 5px;
+                        overflow: hidden;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 25%;
+                          background: var(--color-gold);
+                          height: 100%;
+                        "
+                      ></div>
+                    </div>
                   </div>
-                  <div style="background: rgba(255, 255, 255, 0.1); height: 10px; border-radius: 5px; overflow: hidden;">
-                    <div style="width: 50%; background: var(--color-green); height: 100%;"></div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 0.9rem;
+                        margin-bottom: 0.25rem;
+                      "
+                    >
+                      <span>Intermediate (Score 50-80)</span>
+                      <span>50% of Companies</span>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.1);
+                        height: 10px;
+                        border-radius: 5px;
+                        overflow: hidden;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 50%;
+                          background: var(--color-green);
+                          height: 100%;
+                        "
+                      ></div>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 0.25rem;">
-                    <span>Beginner (Score < 50)</span>
-                    <span>25% of Companies</span>
-                  </div>
-                  <div style="background: rgba(255, 255, 255, 0.1); height: 10px; border-radius: 5px; overflow: hidden;">
-                    <div style="width: 25%; background: #e74c3c; height: 100%;"></div>
+                  <div>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 0.9rem;
+                        margin-bottom: 0.25rem;
+                      "
+                    >
+                      <span>Beginner (Score < 50)</span>
+                      <span>25% of Companies</span>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.1);
+                        height: 10px;
+                        border-radius: 5px;
+                        overflow: hidden;
+                      "
+                    >
+                      <div
+                        style="width: 25%; background: #e74c3c; height: 100%"
+                      ></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ng-container>
           </div>
 
           <!-- Leads Tab Content (Admin Only) -->
-          <div *ngIf="activeDashboardTab === 'leads' && isAdmin" class="dash-tab-content" style="margin-left: -80px; padding: 1rem;">
+          <div
+            *ngIf="activeDashboardTab === 'leads' && isAdmin"
+            class="dash-tab-content"
+            style="margin-left: -80px; padding: 1rem"
+          >
             <div class="dash-header">
               <h2>Sales Leads (Funnel)</h2>
             </div>
-            <div class="metric-card" style="padding: 0; overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <div class="metric-card" style="padding: 0; overflow-x: auto">
+              <table
+                style="width: 100%; border-collapse: collapse; text-align: left"
+              >
                 <thead>
-                  <tr style="border-bottom: 1px solid var(--border-green); background-color: rgba(13, 32, 26, 0.4);">
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">EMAIL</th>
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">ORIGEN</th>
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">ESTADO</th>
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">PUNTAJE</th>
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">DESPERDICIO (USD)</th>
-                    <th style="padding: 0.5rem 0.75rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500;">ACCIONES</th>
+                  <tr
+                    style="
+                      border-bottom: 1px solid var(--border-green);
+                      background-color: rgba(13, 32, 26, 0.4);
+                    "
+                  >
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      EMAIL
+                    </th>
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      ORIGEN
+                    </th>
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      ESTADO
+                    </th>
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      PUNTAJE
+                    </th>
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      DESPERDICIO (USD)
+                    </th>
+                    <th
+                      style="
+                        padding: 0.5rem 0.75rem;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                      "
+                    >
+                      ACCIONES
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let lead of adminLeads" style="border-bottom: 1px solid rgba(27, 60, 45, 0.5);">
-                    <td style="padding: 0.5rem 0.75rem;">
-                      <div style="font-weight: 500;">{{ lead.email }}</div>
+                  <tr
+                    *ngFor="let lead of adminLeads"
+                    style="border-bottom: 1px solid rgba(27, 60, 45, 0.5)"
+                  >
+                    <td style="padding: 0.5rem 0.75rem">
+                      <div style="font-weight: 500">{{ lead.email }}</div>
                     </td>
-                    <td style="padding: 0.5rem 0.75rem;">
-                      <span style="font-size: 0.85rem; color: var(--text-muted);">{{ lead.origen }}</span>
+                    <td style="padding: 0.5rem 0.75rem">
+                      <span
+                        style="font-size: 0.85rem; color: var(--text-muted)"
+                        >{{ lead.origen }}</span
+                      >
                     </td>
-                    <td style="padding: 0.5rem 0.75rem;">
-                      <span [ngStyle]="{'color': lead.estadoFunnel === 'BENCHMARK_COMPLETADO' ? 'var(--color-gold)' : 'var(--text-muted)'}" 
-                            style="font-size: 0.85rem; border: 1px solid currentColor; padding: 2px 6px; border-radius: 4px;">
+                    <td style="padding: 0.5rem 0.75rem">
+                      <span
+                        [ngStyle]="{
+                          color:
+                            lead.estadoFunnel === 'BENCHMARK_COMPLETADO'
+                              ? 'var(--color-gold)'
+                              : 'var(--text-muted)',
+                        }"
+                        style="
+                          font-size: 0.85rem;
+                          border: 1px solid currentColor;
+                          padding: 2px 6px;
+                          border-radius: 4px;
+                        "
+                      >
                         {{ lead.estadoFunnel }}
                       </span>
                     </td>
-                    <td style="padding: 0.5rem 0.75rem;">
-                      <span *ngIf="lead.scoreEficiencia">{{ lead.scoreEficiencia }}/100 <small style="color: var(--text-muted)">({{ lead.nivelMadurez }})</small></span>
-                      <span *ngIf="!lead.scoreEficiencia" style="color: var(--text-muted)">-</span>
+                    <td style="padding: 0.5rem 0.75rem">
+                      <span *ngIf="lead.scoreEficiencia"
+                        >{{ lead.scoreEficiencia }}/100
+                        <small style="color: var(--text-muted)"
+                          >({{ lead.nivelMadurez }})</small
+                        ></span
+                      >
+                      <span
+                        *ngIf="!lead.scoreEficiencia"
+                        style="color: var(--text-muted)"
+                        >-</span
+                      >
                     </td>
-                    <td style="padding: 0.5rem 0.75rem;">
-                      <span *ngIf="lead.wasteAnual" style="color: #e74c3c; font-weight: bold;">${{ lead.wasteAnual | number:'1.0-0' }}</span>
-                      <span *ngIf="!lead.wasteAnual" style="color: var(--text-muted)">-</span>
+                    <td style="padding: 0.5rem 0.75rem">
+                      <span
+                        *ngIf="lead.wasteAnual"
+                        style="color: #e74c3c; font-weight: bold"
+                        >${{ lead.wasteAnual | number: "1.0-0" }}</span
+                      >
+                      <span
+                        *ngIf="!lead.wasteAnual"
+                        style="color: var(--text-muted)"
+                        >-</span
+                      >
                     </td>
-                    <td style="padding: 0.5rem 0.75rem; display: flex; gap: 8px;">
-                      <button *ngIf="lead.wasteAnual || lead.scoreEficiencia" class="btn-outline" style="padding: 4px 8px; font-size: 0.75rem;">Contactar</button>
-                      <a *ngIf="lead.pdfUrl" [href]="lead.pdfUrl" target="_blank" class="btn-primary" style="padding: 4px 8px; font-size: 0.75rem; text-decoration: none;">Ver PDF</a>
+                    <td
+                      style="padding: 0.5rem 0.75rem; display: flex; gap: 8px"
+                    >
+                      <button
+                        *ngIf="lead.wasteAnual || lead.scoreEficiencia"
+                        class="btn-outline"
+                        style="padding: 4px 8px; font-size: 0.75rem"
+                      >
+                        Contactar
+                      </button>
+                      <a
+                        *ngIf="lead.pdfUrl"
+                        [href]="lead.pdfUrl"
+                        target="_blank"
+                        class="btn-primary"
+                        style="
+                          padding: 4px 8px;
+                          font-size: 0.75rem;
+                          text-decoration: none;
+                        "
+                        >Ver PDF</a
+                      >
                     </td>
                   </tr>
                   <tr *ngIf="adminLeads.length === 0">
-                    <td colspan="6" style="padding: 1.5rem; text-align: center; color: var(--text-muted);">
+                    <td
+                      colspan="6"
+                      style="
+                        padding: 1.5rem;
+                        text-align: center;
+                        color: var(--text-muted);
+                      "
+                    >
                       No hay leads en el embudo actualmente.
                     </td>
                   </tr>
@@ -457,34 +1666,75 @@
           </div>
 
           <!-- Outreach (Admin) Tab -->
-          <div class="tab-content outreach" *ngIf="activeDashboardTab === 'outreach' && isAdmin">
+          <div
+            class="tab-content outreach"
+            *ngIf="activeDashboardTab === 'outreach' && isAdmin"
+          >
             <h2>Campañas de Outreach</h2>
-            <p class="subtitle">Sube una lista de contactos CSV para enviar invitaciones automatizadas al Benchmark.</p>
+            <p class="subtitle">
+              Sube una lista de contactos CSV para enviar invitaciones
+              automatizadas al Benchmark.
+            </p>
 
             <div class="glass-card outreach-form">
               <div class="form-group">
                 <label for="campaignName">Nombre de la Campaña</label>
-                <input type="text" id="campaignName" [(ngModel)]="outreachCampanaNombre" placeholder="Ej: CEOs de Data Centers LATAM">
+                <input
+                  type="text"
+                  id="campaignName"
+                  [(ngModel)]="outreachCampanaNombre"
+                  placeholder="Ej: CEOs de Data Centers LATAM"
+                />
               </div>
-              
+
               <div class="form-group">
                 <label for="csvFile">Archivo de Contactos (.csv)</label>
                 <div class="file-upload-box">
-                  <input type="file" id="csvFile" accept=".csv" (change)="onFileSelected($event)" class="file-input">
+                  <input
+                    type="file"
+                    id="csvFile"
+                    accept=".csv"
+                    (change)="onFileSelected($event)"
+                    class="file-input"
+                  />
                   <div class="upload-ui">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-green)" stroke-width="2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                    <p *ngIf="!outreachFile">Haz clic para seleccionar tu CSV o arrástralo aquí.</p>
-                    <p *ngIf="outreachFile" class="file-name">{{ outreachFile.name }}</p>
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="32"
+                      height="32"
+                      stroke="var(--color-green)"
+                      stroke-width="2"
+                      fill="none"
+                    >
+                      <path
+                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                      ></path>
+                      <polyline points="17 8 12 3 7 8"></polyline>
+                      <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p *ngIf="!outreachFile">
+                      Haz clic para seleccionar tu CSV o arrástralo aquí.
+                    </p>
+                    <p *ngIf="outreachFile" class="file-name">
+                      {{ outreachFile.name }}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <button class="btn-primary" (click)="uploadCsv()" [disabled]="isUploadingCsv">
-                {{ isUploadingCsv ? 'Procesando...' : 'Lanzar Campaña y Enviar Correos' }}
+              <button
+                class="btn-primary"
+                (click)="uploadCsv()"
+                [disabled]="isUploadingCsv"
+              >
+                {{
+                  isUploadingCsv
+                    ? "Procesando..."
+                    : "Lanzar Campaña y Enviar Correos"
+                }}
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -508,60 +1758,129 @@
   <!-- White Section -->
   <section class="features-section">
     <h2>Everything You Need to Optimize Your Infrastructure</h2>
-    
+
     <div class="features-grid">
       <div class="feature-card">
         <div class="icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+          </svg>
         </div>
         <div class="content">
           <h3>Calculator</h3>
           <p>Quantify the true cost of underutilized capacity.</p>
-          <a href="#" class="link" (click)="openModal('calculator', $event)">Try Calculator →</a>
+          <a href="#" class="link" (click)="openModal('calculator', $event)"
+            >Try Calculator →</a
+          >
         </div>
       </div>
-      
+
       <div class="feature-card">
         <div class="icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
         </div>
         <div class="content">
           <h3>Benchmark</h3>
           <p>Evaluate your maturity across 6 key operational domains.</p>
-          <a href="#" class="link" (click)="openModal('benchmark', $event)">Take Benchmark →</a>
+          <a href="#" class="link" (click)="openModal('benchmark', $event)"
+            >Take Benchmark →</a
+          >
         </div>
       </div>
-      
+
       <div class="feature-card">
         <div class="icon">
-           <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            ></path>
+          </svg>
         </div>
         <div class="content">
           <h3>Your Report</h3>
-          <p>Get your personalized PDF report with insights and recommendations.</p>
-          <a href="#" class="link" (click)="openModal('custom_report', $event)">See Example Report →</a>
+          <p>
+            Get your personalized PDF report with insights and recommendations.
+          </p>
+          <a href="#" class="link" (click)="openModal('custom_report', $event)"
+            >See Example Report →</a
+          >
         </div>
       </div>
-      
+
       <div class="feature-card">
         <div class="icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          </svg>
         </div>
         <div class="content">
           <h3>Industry Report</h3>
-          <p>Explore trends and insights from the global data center industry.</p>
-          <a href="#" class="link" (click)="openModal('industry_report', $event)">Read the Report →</a>
+          <p>
+            Explore trends and insights from the global data center industry.
+          </p>
+          <a
+            href="#"
+            class="link"
+            (click)="openModal('industry_report', $event)"
+            >Read the Report →</a
+          >
         </div>
       </div>
-      
+
       <div class="feature-card">
         <div class="icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
         </div>
         <div class="content">
           <h3>For Teams</h3>
           <p>Invite your team and manage assessments together.</p>
-          <a href="#" class="link" (click)="openModal('team', $event)">Learn More →</a>
+          <a href="#" class="link" (click)="openModal('team', $event)"
+            >Learn More →</a
+          >
         </div>
       </div>
     </div>
@@ -571,35 +1890,102 @@
   <footer class="footer-banner">
     <div class="founder-info">
       <div class="icon-circle large">
-        <svg viewBox="0 0 24 24" width="28" height="28" stroke="var(--color-gold)" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="28"
+          height="28"
+          stroke="var(--color-gold)"
+          stroke-width="2"
+          fill="none"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
       </div>
       <div class="text">
         <h3>Talk to the Founder</h3>
         <p>Have questions or want a personalized walkthrough? Let's talk.</p>
       </div>
     </div>
-    
+
     <div class="contact-actions">
-      <button class="btn-outline"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Schedule a Call</button>
-      
+      <button class="btn-outline">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        Schedule a Call
+      </button>
+
       <div class="contact-details">
-        <a href="tel:+15551234567" class="phone"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> +1 (555) 123-4567</a>
-        <a href="mailto:founder@aiinfra.com" class="email">founder&#64;aiinfra.com</a>
+        <a href="tel:+15551234567" class="phone"
+          ><svg
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+          +1 (555) 123-4567</a
+        >
+        <a href="mailto:founder@aiinfra.com" class="email"
+          >founder&#64;aiinfra.com</a
+        >
       </div>
-      
+
       <a href="#" class="linkedin">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+        >
+          <path
+            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+          ></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
       </a>
     </div>
   </footer>
   <p class="cat">@Gatorolo</p>
   <div class="gemini-avatar-container">
     <!-- Globo de texto que aparece al hacer hover -->
-    <div class="chat-tooltip" *ngIf="!isChatOpen && isBackendOnline">¿Do you need help?</div>
-    
+    <div class="chat-tooltip" *ngIf="!isChatOpen && isBackendOnline">
+      ¿Do you need help?
+    </div>
+
     <!-- Contenedor del avatar con el video y el estado -->
-    <div class="avatar-wrapper" (click)="toggleChat()" style="cursor: pointer;">
-      <video src="assets/sagrada-3.mp4?v=3" autoplay loop [muted]="true" playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true" class="avatar-img"></video>
+    <div class="avatar-wrapper" (click)="toggleChat()" style="cursor: pointer">
+      <video
+        src="assets/sagrada-3.mp4?v=3"
+        autoplay
+        loop
+        [muted]="true"
+        playsinline
+        oncanplay="this.play()"
+        onloadedmetadata="this.muted = true"
+        class="avatar-img"
+      ></video>
       <span class="status-indicator" [class.offline]="!isBackendOnline"></span>
     </div>
 
@@ -612,9 +1998,13 @@
         </div>
         <button class="close-btn" (click)="toggleChat()">&times;</button>
       </div>
-      
+
       <div class="chat-body">
-        <div class="message" *ngFor="let msg of chatMessages" [ngClass]="msg.isBot ? 'bot-message' : 'user-message'">
+        <div
+          class="message"
+          *ngFor="let msg of chatMessages"
+          [ngClass]="msg.isBot ? 'bot-message' : 'user-message'"
+        >
           <div class="msg-bubble">{{ msg.text }}</div>
         </div>
         <div class="message bot-message" *ngIf="isChatLoading">
@@ -623,18 +2013,37 @@
           </div>
         </div>
       </div>
-      
+
       <div class="chat-footer">
-        <input type="text" [(ngModel)]="chatInput" (keyup.enter)="sendChatMessage()" placeholder="Ask me anything...">
+        <input
+          type="text"
+          [(ngModel)]="chatInput"
+          (keyup.enter)="sendChatMessage()"
+          placeholder="Ask me anything..."
+        />
         <button class="send-btn" (click)="sendChatMessage()">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="16"
+            height="16"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
         </button>
       </div>
     </div>
   </div>
 
   <!-- Modals -->
-  <div class="modal-overlay" *ngIf="activeModal !== null" (click)="closeModal()">
+  <div
+    class="modal-overlay"
+    *ngIf="activeModal !== null"
+    (click)="closeModal()"
+  >
     <div class="modal-container" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h3 *ngIf="activeModal === 'calculator'">Cost Calculator</h3>
@@ -643,142 +2052,438 @@
         <h3 *ngIf="activeModal === 'industry_report'">Industry Report</h3>
         <h3 *ngIf="activeModal === 'team'">Team Management</h3>
         <h3 *ngIf="activeModal === 'resources'">Data Center & AI Resources</h3>
-        
+
         <button class="modal-close" (click)="closeModal()">
-          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
-      
+
       <div class="modal-body">
-        
         <!-- Calculator Content -->
-        <div *ngIf="activeModal === 'calculator'" class="modal-content-placeholder">
+        <div
+          *ngIf="activeModal === 'calculator'"
+          class="modal-content-placeholder"
+        >
           <p>Estimate the financial impact of your idle capacity.</p>
           <div class="input-group">
             <label>Total Annual Spend ($)</label>
-            <input type="number" [(ngModel)]="calcSpend" placeholder="e.g. 5000000">
+            <input
+              type="number"
+              [(ngModel)]="calcSpend"
+              placeholder="e.g. 5000000"
+            />
           </div>
           <div class="input-group">
             <label>Estimated Idle CPU (%)</label>
-            <input type="number" [(ngModel)]="calcIdle" placeholder="e.g. 35">
+            <input type="number" [(ngModel)]="calcIdle" placeholder="e.g. 35" />
           </div>
-          <button class="btn-primary" style="margin-top: 1rem;" (click)="calculateImpact()">Calculate Now</button>
-          
+          <button
+            class="btn-primary"
+            style="margin-top: 1rem"
+            (click)="calculateImpact()"
+          >
+            Calculate Now
+          </button>
+
           <!-- Peaje (Toll) -->
-          <div *ngIf="isCalculatorTollActive" style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 0, 0, 0.5); border: 1px solid var(--border-green); border-radius: 8px;">
-            <h4 style="color: var(--color-green); margin-bottom: 0.5rem;">Tu cálculo está listo</h4>
-            <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Para ver el impacto financiero, confirma tu correo.</p>
+          <div
+            *ngIf="isCalculatorTollActive"
+            style="
+              margin-top: 1.5rem;
+              padding: 1rem;
+              background: rgba(0, 0, 0, 0.5);
+              border: 1px solid var(--border-green);
+              border-radius: 8px;
+            "
+          >
+            <h4 style="color: var(--color-green); margin-bottom: 0.5rem">
+              Tu cálculo está listo
+            </h4>
+            <p
+              style="
+                color: var(--text-muted);
+                margin-bottom: 1rem;
+                font-size: 0.9rem;
+              "
+            >
+              Para ver el impacto financiero, confirma tu correo.
+            </p>
             <div class="input-group">
-              <input type="email" [(ngModel)]="calcTollEmail" placeholder="Enter your work email" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%; margin-bottom: 0.5rem;">
-              <button class="btn-primary" style="width: 100%" (click)="revealImpact()" [disabled]="isRevealingImpact">
-                {{ isRevealingImpact ? 'Procesando...' : 'Ver Impacto' }}
+              <input
+                type="email"
+                [(ngModel)]="calcTollEmail"
+                placeholder="Enter your work email"
+                style="
+                  padding: 0.75rem;
+                  border-radius: 6px;
+                  border: 1px solid var(--border-green);
+                  background: var(--bg-card-light);
+                  color: white;
+                  width: 100%;
+                  margin-bottom: 0.5rem;
+                "
+              />
+              <button
+                class="btn-primary"
+                style="width: 100%"
+                (click)="revealImpact()"
+                [disabled]="isRevealingImpact"
+              >
+                {{ isRevealingImpact ? "Procesando..." : "Ver Impacto" }}
               </button>
             </div>
           </div>
 
           <!-- Resultado Final -->
-          <div *ngIf="calcResult !== null && !isCalculatorTollActive" style="margin-top: 1.5rem; padding: 1rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--color-green); border-radius: 8px; text-align: center;">
-            <span style="display: block; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">Estimated Financial Waste</span>
-            <span style="display: block; color: var(--color-gold); font-size: 1.75rem; font-weight: bold;">{{ calcResult | currency:'USD' }}</span>
+          <div
+            *ngIf="calcResult !== null && !isCalculatorTollActive"
+            style="
+              margin-top: 1.5rem;
+              padding: 1rem;
+              background: rgba(34, 197, 94, 0.1);
+              border: 1px solid var(--color-green);
+              border-radius: 8px;
+              text-align: center;
+            "
+          >
+            <span
+              style="
+                display: block;
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                margin-bottom: 0.25rem;
+              "
+              >Estimated Financial Waste</span
+            >
+            <span
+              style="
+                display: block;
+                color: var(--color-gold);
+                font-size: 1.75rem;
+                font-weight: bold;
+              "
+              >{{ calcResult | currency: "USD" }}</span
+            >
           </div>
         </div>
 
         <!-- Benchmark Content -->
-        <div *ngIf="activeModal === 'benchmark'" class="modal-content-placeholder">
+        <div
+          *ngIf="activeModal === 'benchmark'"
+          class="modal-content-placeholder"
+        >
           <div *ngIf="!isBenchmarkLoading">
             <p>Answer 3 quick questions to assess your maturity.</p>
             <div class="mock-question">
               <strong>1. How do you track infrastructure utilization?</strong>
-              <label><input type="radio" [(ngModel)]="benchQ1" value="a"> Manual spreadsheets</label>
-              <label><input type="radio" [(ngModel)]="benchQ1" value="b"> Basic monitoring tools</label>
-              <label><input type="radio" [(ngModel)]="benchQ1" value="c"> Automated real-time analytics</label>
+              <label
+                ><input type="radio" [(ngModel)]="benchQ1" value="a" /> Manual
+                spreadsheets</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ1" value="b" /> Basic
+                monitoring tools</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ1" value="c" />
+                Automated real-time analytics</label
+              >
             </div>
             <div class="mock-question">
               <strong>2. Primary cooling?</strong>
-              <label><input type="radio" [(ngModel)]="benchQ2" value="a"> Basic CRAC</label>
-              <label><input type="radio" [(ngModel)]="benchQ2" value="b"> Aisle containment</label>
-              <label><input type="radio" [(ngModel)]="benchQ2" value="c"> Liquid cooling</label>
+              <label
+                ><input type="radio" [(ngModel)]="benchQ2" value="a" /> Basic
+                CRAC</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ2" value="b" /> Aisle
+                containment</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ2" value="c" /> Liquid
+                cooling</label
+              >
             </div>
             <div class="mock-question">
               <strong>3. Automation level?</strong>
-              <label><input type="radio" [(ngModel)]="benchQ3" value="a"> Manual</label>
-              <label><input type="radio" [(ngModel)]="benchQ3" value="b"> Scripted</label>
-              <label><input type="radio" [(ngModel)]="benchQ3" value="c"> Kubernetes</label>
+              <label
+                ><input type="radio" [(ngModel)]="benchQ3" value="a" />
+                Manual</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ3" value="b" />
+                Scripted</label
+              >
+              <label
+                ><input type="radio" [(ngModel)]="benchQ3" value="c" />
+                Kubernetes</label
+              >
             </div>
-            <button class="btn-primary" style="margin-top: 1rem; width: 100%" (click)="submitBenchmark()">Generar Análisis con IA</button>
+            <button
+              class="btn-primary"
+              style="margin-top: 1rem; width: 100%"
+              (click)="submitBenchmark()"
+            >
+              Generar Análisis con IA
+            </button>
           </div>
-          
-          <div *ngIf="isBenchmarkLoading" style="text-align: center; padding: 2rem 0;">
-            <div class="icon-circle large mx-auto" style="animation: pulse 1.5s infinite; border-color: var(--color-green);">
-              <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-green)" stroke-width="2" fill="none"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+
+          <div
+            *ngIf="isBenchmarkLoading"
+            style="text-align: center; padding: 2rem 0"
+          >
+            <div
+              class="icon-circle large mx-auto"
+              style="
+                animation: pulse 1.5s infinite;
+                border-color: var(--color-green);
+              "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
+                stroke="var(--color-green)"
+                stroke-width="2"
+                fill="none"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+              </svg>
             </div>
-            <h4 style="margin-top: 1rem; color: var(--color-gold);">Analizando métricas...</h4>
+            <h4 style="margin-top: 1rem; color: var(--color-gold)">
+              Analizando métricas...
+            </h4>
           </div>
         </div>
 
         <!-- Custom Report Content -->
-        <div *ngIf="activeModal === 'custom_report'" class="modal-content-placeholder text-center">
+        <div
+          *ngIf="activeModal === 'custom_report'"
+          class="modal-content-placeholder text-center"
+        >
           <div class="icon-circle large mx-auto">
-            <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-gold)" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            <svg
+              viewBox="0 0 24 24"
+              width="32"
+              height="32"
+              stroke="var(--color-gold)"
+              stroke-width="2"
+              fill="none"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
           </div>
           <h4>Your PDF is Ready</h4>
-          <p>Based on your recent benchmark, we have compiled a detailed analysis of your infrastructure with AI insights.</p>
-          <a *ngIf="benchmarkPdfUrl" [href]="benchmarkPdfUrl" target="_blank" class="btn-primary" style="display: inline-block; text-decoration: none;">Download PDF</a>
-          <p *ngIf="!benchmarkPdfUrl" style="color: var(--color-gold);">Please complete the Benchmark first.</p>
+          <p>
+            Based on your recent benchmark, we have compiled a detailed analysis
+            of your infrastructure with AI insights.
+          </p>
+          <a
+            *ngIf="benchmarkPdfUrl"
+            [href]="benchmarkPdfUrl"
+            target="_blank"
+            class="btn-primary"
+            style="display: inline-block; text-decoration: none"
+            >Download PDF</a
+          >
+          <p *ngIf="!benchmarkPdfUrl" style="color: var(--color-gold)">
+            Please complete the Benchmark first.
+          </p>
         </div>
 
         <!-- Industry Report Content -->
-        <div *ngIf="activeModal === 'industry_report'" class="modal-content-placeholder text-center">
-           <div class="icon-circle large mx-auto">
-            <svg viewBox="0 0 24 24" width="32" height="32" stroke="var(--color-green)" stroke-width="2" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        <div
+          *ngIf="activeModal === 'industry_report'"
+          class="modal-content-placeholder text-center"
+        >
+          <div class="icon-circle large mx-auto">
+            <svg
+              viewBox="0 0 24 24"
+              width="32"
+              height="32"
+              stroke="var(--color-green)"
+              stroke-width="2"
+              fill="none"
+            >
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
           </div>
           <h4>State of AI Infrastructure 2024</h4>
-          <p>Explore trends across 500+ global data centers and see where the industry is heading.</p>
-          <a href="http://localhost:8080/api/benchmark/industry-report" target="_blank" class="btn-primary" style="display: inline-block; text-decoration: none;">Read PDF Report</a>
+          <p>
+            Explore trends across 500+ global data centers and see where the
+            industry is heading.
+          </p>
+          <a
+            href="http://localhost:8080/api/benchmark/industry-report"
+            target="_blank"
+            class="btn-primary"
+            style="display: inline-block; text-decoration: none"
+            >Read PDF Report</a
+          >
         </div>
-        
+
         <!-- Team Content -->
         <div *ngIf="activeModal === 'team'" class="modal-content-placeholder">
           <p>Invite your team members to collaborate on your benchmark.</p>
           <div class="input-group">
-            <input type="email" placeholder="colleague@company.com">
+            <input type="email" placeholder="colleague@company.com" />
             <button class="btn-primary">Send Invite</button>
           </div>
         </div>
 
         <!-- Resources Content -->
-        <div *ngIf="activeModal === 'resources'" class="modal-content-placeholder">
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Technical guides and resources to optimize efficiency and reduce waste in Artificial Intelligence infrastructure.</p>
-          <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <div style="padding: 1rem; background: rgba(34, 197, 94, 0.05); border: 1px solid var(--border-green); border-radius: 8px;">
-              <h4 style="color: var(--color-green); margin-bottom: 0.25rem;">1. Liquid Cooling Transition Guide</h4>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Practical thermal design requirements to support high-density GPUs.</p>
-              <a href="#" style="color: var(--color-gold); font-size: 0.85rem; text-decoration: none;" (click)="$event.preventDefault()">Download Guide (PDF)</a>
+        <div
+          *ngIf="activeModal === 'resources'"
+          class="modal-content-placeholder"
+        >
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem">
+            Technical guides and resources to optimize efficiency and reduce
+            waste in Artificial Intelligence infrastructure.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 1rem">
+            <div
+              style="
+                padding: 1rem;
+                background: rgba(34, 197, 94, 0.05);
+                border: 1px solid var(--border-green);
+                border-radius: 8px;
+              "
+            >
+              <h4 style="color: var(--color-green); margin-bottom: 0.25rem">
+                1. Liquid Cooling Transition Guide
+              </h4>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  margin-bottom: 0.5rem;
+                "
+              >
+                Practical thermal design requirements to support high-density
+                GPUs.
+              </p>
+              <a
+                href="#"
+                style="
+                  color: var(--color-gold);
+                  font-size: 0.85rem;
+                  text-decoration: none;
+                "
+                (click)="$event.preventDefault()"
+                >Download Guide (PDF)</a
+              >
             </div>
-            <div style="padding: 1rem; background: rgba(34, 197, 94, 0.05); border: 1px solid var(--border-green); border-radius: 8px;">
-              <h4 style="color: var(--color-green); margin-bottom: 0.25rem;">2. Whitepaper: AI Workload Energy Optimization</h4>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Methods for orchestrating and scheduling training workloads to reduce consumption peaks.</p>
-              <a href="#" style="color: var(--color-gold); font-size: 0.85rem; text-decoration: none;" (click)="$event.preventDefault()">Download Whitepaper (PDF)</a>
+            <div
+              style="
+                padding: 1rem;
+                background: rgba(34, 197, 94, 0.05);
+                border: 1px solid var(--border-green);
+                border-radius: 8px;
+              "
+            >
+              <h4 style="color: var(--color-green); margin-bottom: 0.25rem">
+                2. Whitepaper: AI Workload Energy Optimization
+              </h4>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  margin-bottom: 0.5rem;
+                "
+              >
+                Methods for orchestrating and scheduling training workloads to
+                reduce consumption peaks.
+              </p>
+              <a
+                href="#"
+                style="
+                  color: var(--color-gold);
+                  font-size: 0.85rem;
+                  text-decoration: none;
+                "
+                (click)="$event.preventDefault()"
+                >Download Whitepaper (PDF)</a
+              >
             </div>
-            <div style="padding: 1rem; background: rgba(34, 197, 94, 0.05); border: 1px solid var(--border-green); border-radius: 8px;">
-              <h4 style="color: var(--color-green); margin-bottom: 0.25rem;">3. ASHRAE 2026 Data Center Standards</h4>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Recommended temperature and humidity limits for next-generation hardware.</p>
-              <a href="#" style="color: var(--color-gold); font-size: 0.85rem; text-decoration: none;" (click)="$event.preventDefault()">View official documentation</a>
+            <div
+              style="
+                padding: 1rem;
+                background: rgba(34, 197, 94, 0.05);
+                border: 1px solid var(--border-green);
+                border-radius: 8px;
+              "
+            >
+              <h4 style="color: var(--color-green); margin-bottom: 0.25rem">
+                3. ASHRAE 2026 Data Center Standards
+              </h4>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  margin-bottom: 0.5rem;
+                "
+              >
+                Recommended temperature and humidity limits for next-generation
+                hardware.
+              </p>
+              <a
+                href="#"
+                style="
+                  color: var(--color-gold);
+                  font-size: 0.85rem;
+                  text-decoration: none;
+                "
+                (click)="$event.preventDefault()"
+                >View official documentation</a
+              >
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
   <!-- Botón de Lupa de Accesibilidad (Abajo a la Izquierda) -->
-  <button (click)="toggleZoom()" aria-label="Activar o desactivar zoom de accesibilidad"
-          class="accessibility-zoom-btn"
-          [class.active]="zoomActivo"
-          title="Accessibility: Zoom/Magnifier">
-    <svg class="zoom-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 7v6m3-3H7"></path>
+  <button
+    (click)="toggleZoom()"
+    aria-label="Activar o desactivar zoom de accesibilidad"
+    class="accessibility-zoom-btn"
+    [class.active]="zoomActivo"
+    title="Accessibility: Zoom/Magnifier"
+  >
+    <svg
+      class="zoom-icon"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      ></path>
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 7v6m3-3H7"
+      ></path>
     </svg>
   </button>
 </div>

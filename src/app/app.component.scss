@@ -242,6 +242,7 @@
   display: flex;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  height: 640px; /* Altura fija que coincide con el tamaño del Overview para mantener proporciones perfectas */
   
   .dash-sidebar {
     width: 220px;
@@ -283,6 +284,7 @@
   .dash-main {
     flex: 1;
     padding: 2rem;
+    overflow-y: auto; /* Permite scroll interno y mantiene altura fija del contenedor */
   
     
     .dash-header {
@@ -654,6 +656,8 @@
   }
 
   .hero-content {
+    max-width: 580px;
+
     .hero-title {
       font-size: 3.2rem;
       margin-top: 145px;
@@ -668,15 +672,42 @@
     .hero-features {
       flex-direction: row;
       flex-wrap: nowrap;
-      gap: 1.5rem;
+      gap: 1rem;
       align-items: stretch;
 
       .feature-item {
-        flex: 1;
+        flex: 0 0 180px;
+        width: 180px;
+        padding: 0.5rem;
+        gap: 0.5rem;
+
+        .icon-circle {
+          width: 36px;
+          height: 36px;
+          flex-shrink: 0;
+        }
+
+        .text {
+          strong {
+            font-size: 0.85rem;
+          }
+          span {
+            font-size: 0.72rem;
+            line-height: 1.2;
+          }
+        }
       }
     }
 
     .hero-cta {
+      width: 572px !important;
+      min-width: 572px !important;
+      max-width: 572px !important;
+      height: 100px !important;
+      min-height: 100px !important;
+      max-height: 100px !important;
+      flex-shrink: 0 !important;
+      flex-grow: 0 !important;
       .input-group {
         flex-direction: row;
         padding: 0.5rem;
@@ -701,6 +732,7 @@
     transform-origin: center right;
     margin-top: -60px;
     margin-left: -40px;
+    width: 780px; /* Ancho fijo para mantener las proporciones al cambiar de pestaña */
     
     .dash-sidebar {
       display: block;
