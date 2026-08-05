@@ -25,6 +25,13 @@ export class AppComponent implements OnInit, OnDestroy {
   outreachCampanaNombre: string = '';
   isUploadingCsv: boolean = false;
   adminLeads: any[] = [];
+  selectedLead: any = null;
+
+  // Variables de Reservar Llamada (Booking)
+  bookingEmail: string = '';
+  selectedDay: number | null = null;
+  selectedSlot: string | null = null;
+  bookingSuccess: boolean = false;
   
   // Variables de la calculadora
   calcSpend: number | null = null;
@@ -198,6 +205,54 @@ export class AppComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.activeModal = null;
+    this.bookingSuccess = false;
+    this.selectedDay = null;
+    this.selectedSlot = null;
+    this.bookingEmail = '';
+  }
+
+  selectDay(day: number) {
+    this.selectedDay = day;
+    this.bookingSuccess = false;
+  }
+
+  selectSlot(slot: string) {
+    this.selectedSlot = slot;
+    this.bookingSuccess = false;
+  }
+
+  confirmBooking() {
+    if (!this.bookingEmail || !this.selectedDay || !this.selectedSlot) return;
+
+    fetch('http://localhost:8080/api/auth/schedule-call', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.bookingEmail,
+        day: this.selectedDay.toString(),
+        slot: this.selectedSlot
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        this.bookingSuccess = true;
+      } else {
+        res.json().then(data => {
+          alert(data.mensaje || 'Error scheduling call');
+        });
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Error connecting to the server');
+    });
+  }
+
+  verDetalleLead(lead: any) {
+    this.selectedLead = lead;
+    this.activeModal = 'lead_detail';
   }
 
   setDashboardTab(tabName: string) {

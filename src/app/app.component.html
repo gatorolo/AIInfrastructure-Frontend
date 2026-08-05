@@ -204,6 +204,7 @@
           <div class="dash-nav">
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               [class.active]="activeDashboardTab === 'overview'"
               (click)="setDashboardTab('overview')"
             >
@@ -221,6 +222,7 @@
             </div>
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               [class.active]="activeDashboardTab === 'calculator'"
               (click)="setDashboardTab('calculator')"
             >
@@ -238,6 +240,7 @@
             </div>
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               [class.active]="activeDashboardTab === 'benchmark'"
               (click)="setDashboardTab('benchmark')"
             >
@@ -257,6 +260,7 @@
             </div>
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               [class.active]="activeDashboardTab === 'custom_report'"
               (click)="setDashboardTab('custom_report')"
             >
@@ -276,6 +280,7 @@
             </div>
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               [class.active]="activeDashboardTab === 'industry'"
               (click)="setDashboardTab('industry')"
             >
@@ -294,6 +299,27 @@
                 ></path>
               </svg>
               Industry Report
+            </div>
+            <div
+              class="dash-item"
+              *ngIf="isAdmin"
+              [class.active]="activeDashboardTab === 'leads'"
+              (click)="setDashboardTab('leads')"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              Sales Leads
             </div>
             <div
               class="dash-item"
@@ -318,6 +344,7 @@
             </div>
             <div
               class="dash-item"
+              *ngIf="!isAdmin"
               (click)="openModal('resources', $event)"
               style="cursor: pointer"
             >
@@ -1489,7 +1516,7 @@
           <div
             *ngIf="activeDashboardTab === 'leads' && isAdmin"
             class="dash-tab-content"
-            style="margin-left: -80px; padding: 1rem"
+            style="padding: 1rem"
           >
             <div class="dash-header">
               <h2>Sales Leads (Funnel)</h2>
@@ -1573,7 +1600,7 @@
                     style="border-bottom: 1px solid rgba(27, 60, 45, 0.5)"
                   >
                     <td style="padding: 0.5rem 0.75rem">
-                      <div style="font-weight: 500">{{ lead.email }}</div>
+                      <div (click)="verDetalleLead(lead)" style="font-weight: 500; cursor: pointer; color: var(--color-green); text-decoration: underline;">{{ lead.email }}</div>
                     </td>
                     <td style="padding: 0.5rem 0.75rem">
                       <span
@@ -1911,7 +1938,7 @@
     </div>
 
     <div class="contact-actions">
-      <button class="btn-outline">
+      <button class="btn-outline" (click)="openModal('schedule', $event)">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -2052,6 +2079,8 @@
         <h3 *ngIf="activeModal === 'industry_report'">Industry Report</h3>
         <h3 *ngIf="activeModal === 'team'">Team Management</h3>
         <h3 *ngIf="activeModal === 'resources'">Data Center & AI Resources</h3>
+        <h3 *ngIf="activeModal === 'schedule'">Schedule a Call</h3>
+        <h3 *ngIf="activeModal === 'lead_detail'">Lead Details: {{ selectedLead?.email }}</h3>
 
         <button class="modal-close" (click)="closeModal()">
           <svg
@@ -2069,7 +2098,130 @@
       </div>
 
       <div class="modal-body">
-        <!-- Calculator Content -->
+        <!-- Bloqueo de Modal si no está verificado (Excepto para 'schedule' y 'lead_detail') -->
+        <div *ngIf="!isVerified && !isAdmin && activeModal !== 'schedule' && activeModal !== 'lead_detail'" style="text-align: center; padding: 2rem 1rem;">
+          <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--color-gold)" stroke-width="2" fill="none" style="margin-bottom: 1rem; margin-left: auto; margin-right: auto;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <h3 style="color: var(--color-gold); margin-bottom: 1rem; font-size: 1.25rem;">Restricted Access</h3>
+          <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">You must activate your account to view this information and access the tools.</p>
+          
+          <div class="input-group" style="display: flex; gap: 10px; max-width: 400px; margin: 0 auto;">
+            <input type="email" [(ngModel)]="calcTollEmail" placeholder="Enter your work email" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; flex: 1; min-width: 0;">
+            <button class="btn-primary" (click)="revealImpact()" [disabled]="isRevealingImpact">
+              {{ isRevealingImpact ? 'Sending...' : 'Request Access' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Schedule Content (Disponible para todos) -->
+        <div *ngIf="activeModal === 'schedule'" class="modal-content-placeholder text-center">
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select a date and time to book a 15-minute intro call with our founder.</p>
+          
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; text-align: left; margin-bottom: 1.5rem;">
+            <!-- Mock Calendar -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-green); padding: 1rem; border-radius: 8px;">
+              <h4 style="color: var(--color-green); margin-bottom: 0.5rem; text-align: center;">August 2026</h4>
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; font-size: 0.75rem; text-align: center; color: var(--text-muted); font-weight: bold; margin-bottom: 0.5rem;">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center;">
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">26</span>
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">27</span>
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">28</span>
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">29</span>
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">30</span>
+                <span style="padding: 5px; color: rgba(255,255,255,0.1);">31</span>
+                <button (click)="selectDay(1)" [style.background]="selectedDay === 1 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 1 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">1</button>
+                <button (click)="selectDay(2)" [style.background]="selectedDay === 2 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 2 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">2</button>
+                <button (click)="selectDay(3)" [style.background]="selectedDay === 3 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 3 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">3</button>
+                <button (click)="selectDay(4)" [style.background]="selectedDay === 4 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 4 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">4</button>
+                <button (click)="selectDay(5)" [style.background]="selectedDay === 5 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 5 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">5</button>
+                <button (click)="selectDay(6)" [style.background]="selectedDay === 6 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 6 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">6</button>
+                <button (click)="selectDay(7)" [style.background]="selectedDay === 7 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 7 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">7</button>
+                <button (click)="selectDay(8)" [style.background]="selectedDay === 8 ? 'var(--color-green)' : 'transparent'" [style.color]="selectedDay === 8 ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 5px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">8</button>
+                <span style="padding: 5px; color: white;">...</span>
+              </div>
+            </div>
+            
+            <!-- Time Slots -->
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <h4 style="color: var(--color-green); margin-bottom: 0.5rem;">Available Slots</h4>
+              <button (click)="selectSlot('10:00 AM')" [style.background]="selectedSlot === '10:00 AM' ? 'var(--color-green)' : 'rgba(255,255,255,0.05)'" [style.color]="selectedSlot === '10:00 AM' ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; text-align: center;">10:00 AM</button>
+              <button (click)="selectSlot('11:30 AM')" [style.background]="selectedSlot === '11:30 AM' ? 'var(--color-green)' : 'rgba(255,255,255,0.05)'" [style.color]="selectedSlot === '11:30 AM' ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; text-align: center;">11:30 AM</button>
+              <button (click)="selectSlot('2:00 PM')" [style.background]="selectedSlot === '2:00 PM' ? 'var(--color-green)' : 'rgba(255,255,255,0.05)'" [style.color]="selectedSlot === '2:00 PM' ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; text-align: center;">2:00 PM</button>
+              <button (click)="selectSlot('4:30 PM')" [style.background]="selectedSlot === '4:30 PM' ? 'var(--color-green)' : 'rgba(255,255,255,0.05)'" [style.color]="selectedSlot === '4:30 PM' ? '#000' : 'white'" style="border: 1px solid var(--border-green); padding: 8px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; text-align: center;">4:30 PM</button>
+            </div>
+          </div>
+
+          <!-- Email Input -->
+          <div class="input-group" style="margin-bottom: 1.5rem; text-align: left;">
+            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Your Email</label>
+            <input type="email" [(ngModel)]="bookingEmail" placeholder="Enter your work email" style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-green); background: var(--bg-card-light); color: white; width: 100%;">
+          </div>
+
+          <button class="btn-primary" style="width: 100%;" (click)="confirmBooking()" [disabled]="!selectedDay || !selectedSlot || !bookingEmail">
+            Confirm Booking
+          </button>
+          
+          <div *ngIf="bookingSuccess" style="margin-top: 1rem; padding: 1rem; background: rgba(34,197,94,0.1); border: 1px solid var(--color-green); border-radius: 8px; color: var(--color-green);">
+             ✓ Booking Confirmed! We have sent a calendar invite to {{ bookingEmail }}.
+          </div>
+        </div>
+
+        <!-- Lead Detail (Admin Only) -->
+        <div *ngIf="activeModal === 'lead_detail'" class="modal-content-placeholder">
+          <div style="display: flex; flex-direction: column; gap: 1.5rem; text-align: left;">
+            
+            <!-- Información General -->
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+              <h4 style="color: var(--color-green); margin-bottom: 0.5rem; font-size: 1.1rem;">General Information</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                <div><strong>Email:</strong> <span style="color: var(--text-white);">{{ selectedLead?.email }}</span></div>
+                <div><strong>Origen:</strong> <span style="color: var(--text-white);">{{ selectedLead?.origen }}</span></div>
+                <div><strong>Estado Funnel:</strong> <span style="color: var(--color-gold);">{{ selectedLead?.estadoFunnel }}</span></div>
+                <div><strong>PDF Report:</strong> 
+                  <a *ngIf="selectedLead?.pdfUrl" [href]="selectedLead?.pdfUrl" target="_blank" style="color: var(--color-green); text-decoration: underline; font-weight: bold;">Download PDF</a>
+                  <span *ngIf="!selectedLead?.pdfUrl" style="color: var(--text-muted);">Not Generated</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Métricas del Benchmark -->
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+              <h4 style="color: var(--color-green); margin-bottom: 0.5rem; font-size: 1.1rem;">Infrastructure Benchmark Metrics</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                <div><strong>Maturity Score:</strong> 
+                  <span *ngIf="selectedLead?.scoreEficiencia !== null" style="color: var(--text-white); font-weight: bold;">{{ selectedLead?.scoreEficiencia }}/100</span>
+                  <span *ngIf="selectedLead?.scoreEficiencia === null" style="color: var(--text-muted);">-</span>
+                </div>
+                <div><strong>Maturity Level:</strong> <span style="color: var(--text-white);">{{ selectedLead?.nivelMadurez || '-' }}</span></div>
+                <div><strong>Industry Position:</strong> <span style="color: var(--text-white);">Top {{ selectedLead?.posicionIndustria || '-' }}%</span></div>
+              </div>
+            </div>
+
+            <!-- Métricas de la Calculadora -->
+            <div>
+              <h4 style="color: var(--color-green); margin-bottom: 0.5rem; font-size: 1.1rem;">Cost Calculator Metrics</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;">
+                <div><strong>Annual Waste:</strong> 
+                  <span *ngIf="selectedLead?.wasteAnual !== null" style="color: #e74c3c; font-weight: bold;">${{ selectedLead?.wasteAnual | number: '1.2-2' }}</span>
+                  <span *ngIf="selectedLead?.wasteAnual === null" style="color: var(--text-muted);">-</span>
+                </div>
+                <div><strong>Idle Capacity:</strong> 
+                  <span *ngIf="selectedLead?.idleCapacityPct !== null" style="color: var(--text-white);">{{ selectedLead?.idleCapacityPct }}%</span>
+                  <span *ngIf="selectedLead?.idleCapacityPct === null" style="color: var(--text-muted);">-</span>
+                </div>
+                <div><strong>Power Usage (PUE):</strong> 
+                  <span *ngIf="selectedLead?.powerUsagePue !== null" style="color: var(--text-white);">{{ selectedLead?.powerUsagePue }} PUE</span>
+                  <span *ngIf="selectedLead?.powerUsagePue === null" style="color: var(--text-muted);">-</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <ng-container *ngIf="isVerified || isAdmin">
+          <!-- Calculator Content -->
         <div
           *ngIf="activeModal === 'calculator'"
           class="modal-content-placeholder"
@@ -2453,7 +2605,8 @@
             </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+    </div>
     </div>
   </div>
   <!-- Botón de Lupa de Accesibilidad (Abajo a la Izquierda) -->
