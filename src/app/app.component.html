@@ -437,10 +437,10 @@
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
                 <h3 style="color: var(--color-gold); margin-bottom: 0.5rem">
-                  Resultados Bloqueados
+                  Locked Results
                 </h3>
                 <p style="color: white; margin-bottom: 1rem">
-                  Debes activar tu cuenta para acceder al reporte completo.
+                  You must activate your account to access the full report.
                 </p>
 
                 <div
@@ -455,7 +455,7 @@
                   <input
                     type="email"
                     [(ngModel)]="calcTollEmail"
-                    placeholder="Ingresa tu correo"
+                    placeholder="Enter your work email"
                     style="
                       padding: 0.75rem;
                       border-radius: 6px;
@@ -470,7 +470,7 @@
                     (click)="revealImpact()"
                     [disabled]="isRevealingImpact"
                   >
-                    {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
+                    {{ isRevealingImpact ? "Sending..." : "Request Access" }}
                   </button>
                 </div>
               </div>
@@ -854,11 +854,10 @@
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
               <h3 style="color: var(--color-gold); margin-bottom: 1rem">
-                Acceso Restringido
+                Restricted Access
               </h3>
               <p style="color: var(--text-muted); margin-bottom: 2rem">
-                Debes activar tu cuenta para realizar el benchmark y obtener el
-                reporte de IA.
+                You must activate your account to complete the benchmark and unlock the AI report.
               </p>
 
               <div
@@ -873,7 +872,7 @@
                 <input
                   type="email"
                   [(ngModel)]="calcTollEmail"
-                  placeholder="Ingresa tu correo"
+                  placeholder="Enter your work email"
                   style="
                     padding: 0.75rem;
                     border-radius: 6px;
@@ -888,7 +887,7 @@
                   (click)="revealImpact()"
                   [disabled]="isRevealingImpact"
                 >
-                  {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
+                  {{ isRevealingImpact ? "Sending..." : "Request Access" }}
                 </button>
               </div>
             </div>
@@ -1205,11 +1204,10 @@
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
               <h3 style="color: var(--color-gold); margin-bottom: 1rem">
-                Acceso Restringido
+                Restricted Access
               </h3>
               <p style="color: var(--text-muted); margin-bottom: 2rem">
-                Debes activar tu cuenta para acceder a las métricas del Reporte
-                Global de la Industria.
+                You must activate your account to view the Global Industry Report metrics.
               </p>
 
               <div
@@ -1224,7 +1222,7 @@
                 <input
                   type="email"
                   [(ngModel)]="calcTollEmail"
-                  placeholder="Ingresa tu correo"
+                  placeholder="Enter your work email"
                   style="
                     padding: 0.75rem;
                     border-radius: 6px;
@@ -1239,7 +1237,7 @@
                   (click)="revealImpact()"
                   [disabled]="isRevealingImpact"
                 >
-                  {{ isRevealingImpact ? "Enviando..." : "Solicitar Acceso" }}
+                  {{ isRevealingImpact ? "Sending..." : "Request Access" }}
                 </button>
               </div>
             </div>
@@ -1663,7 +1661,7 @@
                       </button>
                       <a
                         *ngIf="lead.pdfUrl"
-                        [href]="lead.pdfUrl"
+                        [href]="'http://localhost:8080' + lead.pdfUrl"
                         target="_blank"
                         class="btn-primary"
                         style="
@@ -2179,7 +2177,7 @@
                 <div><strong>Origen:</strong> <span style="color: var(--text-white);">{{ selectedLead?.origen }}</span></div>
                 <div><strong>Estado Funnel:</strong> <span style="color: var(--color-gold);">{{ selectedLead?.estadoFunnel }}</span></div>
                 <div><strong>PDF Report:</strong> 
-                  <a *ngIf="selectedLead?.pdfUrl" [href]="selectedLead?.pdfUrl" target="_blank" style="color: var(--color-green); text-decoration: underline; font-weight: bold;">Download PDF</a>
+                  <a *ngIf="selectedLead?.pdfUrl" [href]="'http://localhost:8080' + selectedLead?.pdfUrl" target="_blank" style="color: var(--color-green); text-decoration: underline; font-weight: bold;">Download PDF</a>
                   <span *ngIf="!selectedLead?.pdfUrl" style="color: var(--text-muted);">Not Generated</span>
                 </div>
               </div>

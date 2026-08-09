@@ -314,7 +314,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isRevealingImpact = true;
 
-    // 1. Pedir acceso (envía el correo de activación)
+    // 1. Pedir acceso (envía el correo de activación si es nuevo)
     fetch('http://localhost:8080/api/auth/request-access', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -332,19 +332,43 @@ export class AppComponent implements OnInit, OnDestroy {
           idle: this.calcIdle,
           waste: this.calcResult
         })
+      }).then(() => {
+        return authData; // Retornar authData para el siguiente .then
       });
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(authData => {
       this.isRevealingImpact = false;
       this.isCalculatorTollActive = false;
       
-      Swal.fire({
-        title: '¡Casi listo!',
-        text: 'Hemos enviado un enlace de activación a tu correo. Por favor, haz clic en él para ver tus resultados y continuar con el Benchmark.',
-        icon: 'info',
-        confirmButtonColor: '#22c55e'
-      });
+      if (authData.requiereActivacion) {
+        Swal.fire({
+          title: '¡Casi listo!',
+          text: 'Hemos enviado un enlace de activación a tu correo. Por favor, haz clic en él para ver tus resultados y continuar con el Benchmark.',
+          icon: 'success',
+          confirmButtonColor: '#22c55e'
+        });
+      } else {
+        // Usuario ya registrado, login inmediato sin esperar enlace
+        this.userEmail = authData.email;
+        this.isVerified = true;
+        localStorage.setItem('userEmail', authData.email);
+        localStorage.setItem('isVerified', 'true');
+        if (authData.usuarioId) {
+          localStorage.setItem('usuarioId', String(authData.usuarioId));
+          this.dashboardService.getDashboardData(authData.usuarioId).subscribe({
+            next: (dashData) => {
+              this.handleDashboardData(dashData);
+            },
+            error: (err) => console.error('Error cargando datos de usuario existente:', err)
+          });
+        }
+        Swal.fire({
+          title: '¡Bienvenido de vuelta!',
+          text: 'Hemos iniciado sesión con tu correo: ' + authData.email,
+          icon: 'success',
+          confirmButtonColor: '#22c55e'
+        });
+      }
     })
     .catch(err => {
       this.isRevealingImpact = false;
