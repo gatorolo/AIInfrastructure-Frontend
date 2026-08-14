@@ -3,6 +3,7 @@ import { UsuarioService } from './usuario.service';
 import { ChatService } from './chat.service';
 import { DashboardService } from './dashboard.service';
 import Swal from 'sweetalert2';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -104,7 +105,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (token) {
       // Intentar validar token
-      fetch(`http://localhost:8080/api/auth/verify?token=${token}`)
+      fetch(`${environment.apiUrl}/auth/verify?token=${token}`)
         .then(res => {
           if (!res.ok) throw new Error('Token inválido');
           return res.json();
@@ -224,7 +225,7 @@ export class AppComponent implements OnInit, OnDestroy {
   confirmBooking() {
     if (!this.bookingEmail || !this.selectedDay || !this.selectedSlot) return;
 
-    fetch('http://localhost:8080/api/auth/schedule-call', {
+    fetch(`${environment.apiUrl}/auth/schedule-call`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -271,7 +272,7 @@ export class AppComponent implements OnInit, OnDestroy {
         // Bypass toll and just save metrics
         this.isCalculatorTollActive = false;
         if (this.userEmail) {
-          fetch('http://localhost:8080/api/calculadora/guardar', {
+          fetch(`${environment.apiUrl}/calculadora/guardar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -315,7 +316,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isRevealingImpact = true;
 
     // 1. Pedir acceso (envía el correo de activación si es nuevo)
-    fetch('http://localhost:8080/api/auth/request-access', {
+    fetch(`${environment.apiUrl}/auth/request-access`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: this.calcTollEmail.trim() })
@@ -323,7 +324,7 @@ export class AppComponent implements OnInit, OnDestroy {
     .then(res => res.json())
     .then(authData => {
       // 2. Guardar las métricas de la calculadora vinculadas a ese email
-      return fetch('http://localhost:8080/api/calculadora/guardar', {
+      return fetch(`${environment.apiUrl}/calculadora/guardar`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -392,7 +393,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isBenchmarkLoading = true;
 
     // Llamada al backend
-    fetch('http://localhost:8080/api/benchmark/submit', {
+    fetch(`${environment.apiUrl}/benchmark/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -410,7 +411,7 @@ export class AppComponent implements OnInit, OnDestroy {
     .then(data => {
       this.isBenchmarkLoading = false;
       if (data.pdfUrl) {
-        this.benchmarkPdfUrl = 'http://localhost:8080' + data.pdfUrl;
+        this.benchmarkPdfUrl = environment.baseUrl + data.pdfUrl;
         
         // Re-fetch dashboard data to update Overview tab with new maturity, score, and position
         const savedUsuarioId = localStorage.getItem('usuarioId');
@@ -527,7 +528,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.isSendingAccessEmail = true;
 
-    fetch('http://localhost:8080/api/auth/request-access', {
+    fetch(`${environment.apiUrl}/auth/request-access`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: targetEmail })
@@ -746,7 +747,7 @@ export class AppComponent implements OnInit, OnDestroy {
     formData.append('file', this.outreachFile);
     formData.append('nombreCampana', this.outreachCampanaNombre.trim());
 
-    fetch('http://localhost:8080/api/outreach/upload', {
+    fetch(`${environment.apiUrl}/outreach/upload`, {
       method: 'POST',
       body: formData
     })
@@ -769,7 +770,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   loadAdminLeads() {
-    fetch('http://localhost:8080/api/outreach/leads')
+    fetch(`${environment.apiUrl}/outreach/leads`)
       .then(res => res.json())
       .then(data => {
         this.adminLeads = data;
@@ -786,7 +787,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   checkBackendHealth() {
-    fetch('http://localhost:8080/api/health')
+    fetch(`${environment.apiUrl}/health`)
       .then(res => {
         this.isBackendOnline = res.ok;
         if (!this.isBackendOnline) {
@@ -802,7 +803,7 @@ export class AppComponent implements OnInit, OnDestroy {
   handleDashboardData(dashData: any) {
     this.dashboardData = dashData;
     if (dashData && dashData.pdfUrl) {
-      this.benchmarkPdfUrl = 'http://localhost:8080' + dashData.pdfUrl;
+      this.benchmarkPdfUrl = environment.baseUrl + dashData.pdfUrl;
     } else {
       this.benchmarkPdfUrl = null;
     }

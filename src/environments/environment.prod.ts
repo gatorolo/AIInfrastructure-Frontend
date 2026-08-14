@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://backend-ia-infrastructure-xxxxxx.a.run.app/api' // Reemplazar con la URL real de Cloud Run después de deployar
+  apiUrl: 'https://backend-ia-infrastructure-xxxxxx.a.run.app/api', // Reemplazar con la URL real de Cloud Run después de deployar
+  baseUrl: 'https://backend-ia-infrastructure-xxxxxx.a.run.app' // Reemplazar con la URL real de Cloud Run
 };
