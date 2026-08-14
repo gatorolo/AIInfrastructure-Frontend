@@ -1661,7 +1661,7 @@
                       </button>
                       <a
                         *ngIf="lead.pdfUrl"
-                        [href]="'http://localhost:8080' + lead.pdfUrl"
+                        [href]="baseUrl + lead.pdfUrl"
                         target="_blank"
                         class="btn-primary"
                         style="
@@ -1671,6 +1671,18 @@
                         "
                         >Ver PDF</a
                       >
+                      <button
+                        (click)="eliminarLead(lead.email, $event)"
+                        class="btn-outline"
+                        style="
+                          padding: 4px 8px;
+                          font-size: 0.75rem;
+                          color: #ef4444;
+                          border-color: rgba(239, 68, 68, 0.4);
+                        "
+                      >
+                        Borrar
+                      </button>
                     </td>
                   </tr>
                   <tr *ngIf="adminLeads.length === 0">

@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "ai-infrastructure-benchmark",
     "public": "dist/ai-infrastructure-frontend",
     "ignore": [
       "firebase.json",

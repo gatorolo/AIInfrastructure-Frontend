@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'ai-infrastructure-frontend';
+  baseUrl: string = environment.baseUrl;
   userEmail: string = '';
   isBackendOnline: boolean = true;
   private healthCheckInterval: any;
@@ -778,6 +779,47 @@ export class AppComponent implements OnInit, OnDestroy {
       .catch(err => {
         console.error('Error loading leads:', err);
       });
+  }
+
+  eliminarLead(email: string, event: Event) {
+    event.stopPropagation(); // Evitar abrir el detalle del lead
+    
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar permanentemente al contacto ${email} y todos sus datos relacionados (métricas, respuestas del benchmark y seguimientos)?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#ef4444',
+      cancelButtonColor: '#3b82f6'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Eliminando...',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading(null);
+          }
+        });
+
+        fetch(`${environment.apiUrl}/outreach/leads/${email}`, {
+          method: 'DELETE'
+        })
+        .then(res => {
+          if (!res.ok) throw new Error('Error al eliminar');
+          return res.json();
+        })
+        .then(() => {
+          Swal.fire('¡Eliminado!', 'El contacto ha sido eliminado exitosamente.', 'success');
+          this.loadAdminLeads();
+        })
+        .catch(err => {
+          console.error(err);
+          Swal.fire('Error', 'No se pudo eliminar el contacto.', 'error');
+        });
+      }
+    });
   }
 
   ngOnDestroy() {
