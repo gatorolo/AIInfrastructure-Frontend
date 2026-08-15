@@ -1247,7 +1247,7 @@
               <div class="dash-header">
                 <h2>Global Industry Report</h2>
                 <a
-                  href="http://localhost:8080/api/benchmark/industry-report"
+                  [href]="baseUrl + '/api/benchmark/industry-report'"
                   target="_blank"
                   class="btn-outline btn-small"
                   style="
@@ -2189,7 +2189,7 @@
                 <div><strong>Origen:</strong> <span style="color: var(--text-white);">{{ selectedLead?.origen }}</span></div>
                 <div><strong>Estado Funnel:</strong> <span style="color: var(--color-gold);">{{ selectedLead?.estadoFunnel }}</span></div>
                 <div><strong>PDF Report:</strong> 
-                  <a *ngIf="selectedLead?.pdfUrl" [href]="'http://localhost:8080' + selectedLead?.pdfUrl" target="_blank" style="color: var(--color-green); text-decoration: underline; font-weight: bold;">Download PDF</a>
+                  <a *ngIf="selectedLead?.pdfUrl" [href]="baseUrl + selectedLead?.pdfUrl" target="_blank" style="color: var(--color-green); text-decoration: underline; font-weight: bold;">Download PDF</a>
                   <span *ngIf="!selectedLead?.pdfUrl" style="color: var(--text-muted);">Not Generated</span>
                 </div>
               </div>
@@ -2490,7 +2490,7 @@
             industry is heading.
           </p>
           <a
-            href="http://localhost:8080/api/benchmark/industry-report"
+            [href]="baseUrl + '/api/benchmark/industry-report'"
             target="_blank"
             class="btn-primary"
             style="display: inline-block; text-decoration: none"
