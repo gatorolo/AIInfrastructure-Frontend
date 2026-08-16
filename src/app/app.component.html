@@ -1653,7 +1653,7 @@
                       style="padding: 0.5rem 0.75rem; display: flex; gap: 8px"
                     >
                       <button
-                        *ngIf="lead.wasteAnual || lead.scoreEficiencia"
+                        (click)="contactarLead(lead.email, $event)"
                         class="btn-outline"
                         style="padding: 4px 8px; font-size: 0.75rem"
                       >

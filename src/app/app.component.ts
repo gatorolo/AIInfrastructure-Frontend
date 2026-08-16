@@ -822,6 +822,62 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  async contactarLead(email: string, event: Event) {
+    event.stopPropagation();
+    
+    const { value: formValues } = await Swal.fire({
+      title: `Contactar a ${email}`,
+      html:
+        '<input id="swal-asunto" class="swal2-input" placeholder="Asunto" value="Seguimiento AI Infrastructure Benchmark">' +
+        '<textarea id="swal-mensaje" class="swal2-textarea" placeholder="Escribe tu mensaje personalizado aquí..." style="height: 120px;"></textarea>',
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Enviar Correo',
+      confirmButtonColor: '#22c55e',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const asunto = (document.getElementById('swal-asunto') as HTMLInputElement).value;
+        const mensaje = (document.getElementById('swal-mensaje') as HTMLTextAreaElement).value;
+        if (!mensaje || !mensaje.trim()) {
+          Swal.showValidationMessage('El mensaje no puede estar vacío');
+          return false;
+        }
+        return { asunto, mensaje };
+      }
+    });
+
+    if (formValues) {
+      Swal.fire({
+        title: 'Enviando correo...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading(null);
+        }
+      });
+
+      fetch(`${environment.apiUrl}/outreach/contactar`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          asunto: formValues.asunto,
+          mensaje: formValues.mensaje
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Error al enviar mensaje');
+        return res.json();
+      })
+      .then(() => {
+        Swal.fire('¡Correo Enviado!', `El mensaje ha sido enviado a ${email}.`, 'success');
+      })
+      .catch(err => {
+        console.error(err);
+        Swal.fire('Error', 'No se pudo enviar el correo.', 'error');
+      });
+    }
+  }
+
   ngOnDestroy() {
     if (this.healthCheckInterval) {
       clearInterval(this.healthCheckInterval);
