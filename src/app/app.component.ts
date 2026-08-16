@@ -803,7 +803,7 @@ export class AppComponent implements OnInit, OnDestroy {
           }
         });
 
-        fetch(`${environment.apiUrl}/outreach/leads/${email}`, {
+        fetch(`${environment.apiUrl}/outreach/leads?email=${encodeURIComponent(email)}`, {
           method: 'DELETE'
         })
         .then(res => {
